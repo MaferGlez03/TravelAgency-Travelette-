@@ -24,7 +24,8 @@ namespace TravelAgency.Infrastructure
             services.AddScoped<IAgencyOfferRepository, AgencyOfferRepository>();
             services.AddScoped<IPackageRepository, PackageRepository>();
             services.AddScoped<IPackageFacilityRepository, PackageFacilityRepository>();
-            services.AddScoped<IExcursionRepository, ExcursionRepository>();            
+            services.AddScoped<IExcursionRepository, ExcursionRepository>();
+            services.AddScoped<IExtendedExcursionRepository, ExtendedExcursionRepository>();            
             services.AddScoped<TravelAgencyContextInitializer>();
 
             services.AddAuthentication();
