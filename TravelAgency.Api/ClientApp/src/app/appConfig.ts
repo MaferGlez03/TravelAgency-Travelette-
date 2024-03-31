@@ -2,10 +2,17 @@ import { ApplicationConfig } from '@angular/core';
 import { provideRouter } from '@angular/router';
 import { routes } from './app.routes';
 import { RegisterService } from './Services/register.service';
-import { HttpClient } from '@microsoft/signalr';
-import { provideHttpClient } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import { JwtInterceptor } from './Services/Models/jwt.interceptor';
 
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), RegisterService, provideHttpClient()]
+    providers: [
+        {
+            provide: HTTP_INTERCEPTORS,
+            useClass: JwtInterceptor,
+            multi: true
+        },
+        provideRouter(routes),
+        provideHttpClient()]
 };

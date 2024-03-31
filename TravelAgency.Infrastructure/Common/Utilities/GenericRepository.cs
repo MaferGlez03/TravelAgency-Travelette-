@@ -11,7 +11,7 @@ namespace TravelAgency.Infrastructure.Common.Utilities
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
     {
         protected readonly DbSet<TEntity> entity;
-        private TravelAgencyContext _context;
+        public TravelAgencyContext _context;
         public GenericRepository(TravelAgencyContext context)
         {
             if (context == null)

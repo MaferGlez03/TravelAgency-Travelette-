@@ -1,23 +1,187 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin</title>
-</head>
-<body>
-    <div class="admin">
-        <div class="container">
-            <h1 class="Texto">Admin</h1>
-        </div>
-        <div class="row1">
-        </div>
-        <div class="row2">
-        </div>
-        <div class="row3">
-        </div>
-        <div class="row4">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+<div class="container">
+    <div class="title">
+        <h1>ADMIN</h1>
+    </div>
+    <div class="create-buttons">
+        <button class="add-hotel-btn adds" (click)="addHotel()">Añadir Hotel</button>
+        <button class="add-agency-btn adds" (click)="addAgency()">Añadir Agencia</button>
+        <button class="add-agency-btn adds" (click)="addUser()">Añadir User</button>
+    </div>
+    <div class="filter-bar">
+        <button class="filter-hotel-btn lists" (click)="listHotel()">Listar Hoteles</button>
+        <button class="filter-agency-btn lists" (click)="listAgency()">Listar Agencias</button>
+        <button class="filter-all-btn lists" (click)="listUser()">Listar Usuarios</button>
+    </div>
+    <div class="tabla" *ngIf="currentdata === 'agency'">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>ID</th>
+                <th>Direccion</th>
+                <th>Email</th>
+                <th>Fax</th>
+                <th>Update</th>
+                <th>Borrar</th>
+            </tr>
+            <tr *ngFor="let item of products2 | slice:0:10">
+                <td>{{item.name}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.address}}</td>
+                <td>{{item.electronicAddress}}</td>
+                <td>{{item.fax}}</td>
+                <td><img src="../../assets/edit-svgrepo-com.svg" alt="update-icon" (click)="updateAgency(item.id)"></td>
+                <td><img src="../../assets/delete-icon.svg" alt="delete-icon" (click)="deleteAgency(item.id)"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="tabla" *ngIf="currentdata === 'hotel'">
+        <table>
+            <tr>
+                <th>Nombre</th>
+                <th>ID</th>
+                <th>Categoria</th>
+                <th>Direccion</th>
+                <th>Borrar</th>
+            </tr>
+            <tr *ngFor="let item of products | slice:0:10">
+                <td>{{item.name}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.address}}</td>
+                <td><img src="../../assets/delete-icon.svg" alt="delete-icon" (click)="deleteHotel(item.id)"></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="tabla" *ngIf="currentdata === 'user'">
+        <table>
+            <tr>
+                <th>Username</th>
+                <th>Tipo</th>
+                <th>Nacionalidad</th>
+                <th>Email</th>
+                <th>Borrar</th>
+            </tr>
+            <tr *ngFor="let item of products | slice:0:10">
+                <td>{{item.name}}</td>
+                <td>{{item.id}}</td>
+                <td>{{item.category}}</td>
+                <td>{{item.address}}</td>
+                <td><img src="../../assets/delete-icon.svg" alt="delete-icon" (click)="deleteUser(item.id)"></td>
+            </tr>
+        </table>
+    </div>
+    
+    <div class="add" *ngIf="currentdata === 'addAgency'">
+        <div class="containerA">
+            <h1 class="titleA">Add Agency</h1>
+            <div class="bodyA">
+                <div class="topA">
+                    <img class="imageA" src="../../assets/img/agency.jpg" />
+                    <div class="NombreA">
+                        <div class="nameA">Nombre</div>
+                        <input class="textboxA" type="text" id="Nombre">
+                        <div class="addressA">Fax</div>
+                        <input class="textboxA" type="text" id="Fax">
+                    </div>
+                </div>
+                <div class="bottomA">
+                    <div class="categoryA">Correo electrónico</div>
+                    <input class="textboxA EA" type="text" id="Email">
+                    <div class="addressA">Dirección</div>
+                    <input class="textboxA EA" type="text" id="Direccion">
+                </div>
+            </div>
+            <div class="bottom-line"></div>
+            <div class="buttons-boxA">
+                <button class="buttonA add-btnA" (click)="createAgencyPost()">Añadir Agencia</button>
+                <button class="buttonA close-btnA" (click)="showNothing()">Cerrar</button>
+            </div>
         </div>
     </div>
-</body>
-</html>
+    
+    <div class="add" *ngIf="currentdata === 'addHotel'">
+        <div class="containerH">
+            <h1 class="titleH">Add Hotel</h1>
+            <!-- <div class="top-line"></div> -->
+            <div class="bodyH">
+                <div class="topH">
+                    <img class="imageH" src="../../assets/img/hotel.jpg" />
+                    <div class="NombreH">
+                        <div class="nameH">Nombre</div>
+                        <input class="textboxH" type="text" id="Nombre">
+                    </div>
+                </div>
+                <div class="bottomH">
+                    <div class="categoryH">Category</div>
+                    <input class="textboxH EH" type="text" id="Categoria">
+                    <div class="addressH">Dirección</div>
+                    <input class="textboxH EH" type="text" id="Direccion">
+                </div>
+            </div>
+            <div class="bottom-line"></div>
+            <div class="buttons-boxH">
+                <button class="buttonH add-btnH" (click)="createHotelPost()">Añadir Hotel</button>
+                <button class="buttonH close-btnH" (click)="showNothing()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="add" *ngIf="currentdata === 'addUser'">
+        <div class="Ulogin">
+            <div class="Ucontainer">
+                <div class="USignup">
+                    <h1 class="UTexto-principal">Add User</h1>
+                </div>
+                <form method="get" class="Ubloque">
+                    <div class="Uform">
+                        <div class="Ublock">
+                            <p class="UText">Tipo de usuario</p>
+                            <select class="Utextbox" name="userType" id="userType">
+                                <option value="admin">Marketing</option>
+                                <option value="admin">Personal del Hotel</option>
+                            </select>
+                        </div>
+                        <div class="Ublock">
+                            <p class="UText">Username</p>
+                            <input class="Utextbox" type="text" name="userName" id="userName">
+                        </div>
+                        <div class="Ublock">
+                            <p class="UText">Nacionality</p>
+                            <input class="Utextbox" type="text" name="nacionality" id="nacionality">
+                        </div>
+                        <div class="Ublock">
+                            <p class="UText">Email</p>
+                            <input class="Utextbox" type="text" name="email" id="email"autocomplete="Username">
+                        </div>
+                        <div class="Ublock">
+                            <p class="UText">Password</p>
+                            <input class="Utextbox" type="{{showPassword ? 'text' : 'password'}}" name="password" id="password" autocomplete="new-password">
+                            <img class="Ueye1" (click)="see()" [src]=imgPath>
+                        </div>
+                        <div class="Ublock">
+                            <p class="UText">Confirm Password</p>
+                            <input class="Utextbox" type="{{showPassword ? 'text' : 'password'}}" id="Rpassword" autocomplete="new-password">
+                            <img class="Ueye2" (click)="see()" [src]=imgPath>
+                            <p id="passwordError" class="Uerror-text"></p> 
+                        </div>
+                    </div>
+                    <div class="Ubuttons-block">
+                        <div class="Ubuttons">
+                            <button class="Ubutton" type="button" (click)="registerPost()">Create account</button>
+                            <button class="buttonH close-btnH" type="button" (click)="showNothing()">Cerrar</button>
+                        </div>
+                        <div class="Uminifooter">
+                            <p class="Usimple-text">Already have an account? </p>
+                            <a routerLink="../login" class="Ulink-text"> Login</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

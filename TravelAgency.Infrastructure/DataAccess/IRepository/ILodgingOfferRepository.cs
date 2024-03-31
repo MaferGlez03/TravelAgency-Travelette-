@@ -9,7 +9,7 @@ namespace TravelAgency.Infrastructure.DataAccess.IRepository
 {
     public interface ILodgingOfferRepository:IGenericRepository<LodgingOffer>
     {
-        
+        IEnumerable<LodgingOffer> GetLodgingOffers();
     }
 
     

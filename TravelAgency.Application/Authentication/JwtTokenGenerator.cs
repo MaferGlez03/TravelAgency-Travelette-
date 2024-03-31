@@ -4,6 +4,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
@@ -23,7 +24,7 @@ namespace TravelAgency.Application.Authentication
         _jwtSettings = jwtSettingsOptions.Value;
     }
 
-        public string GenerateToken(User user)
+        public string GenerateToken(User user, string userRole)
         {
             var key = new SigningCredentials(
             new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret)),
@@ -33,8 +34,9 @@ namespace TravelAgency.Application.Authentication
            {
               new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
               new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
+              new Claim(ClaimTypes.Role, userRole),
               //new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
-              //new Claim(Role,JsonSerializer.Serialize(user.Role.Permissions)),
+              //new Claim("Role",userRole),
               new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
            };
 

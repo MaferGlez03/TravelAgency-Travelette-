@@ -6,10 +6,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.ApplicationServices.IServices;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.AddOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Domain.Constant;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure;
+using TravelAgency.Infrastructure.DataAccess.Filters;
 
 namespace TravelAgency.Api.Controllers
 {
@@ -28,14 +30,27 @@ namespace TravelAgency.Api.Controllers
         //[Authorize(Roles = "SuperAdmin")]
         public async Task<IActionResult> CreateAgency(AgencyDto agency)
         {
-            await _agencyService.CreateAgencyAsync(agency);
-            return Ok();
+           var agency2 = await _agencyService.CreateAgencyAsync(agency);
+            return Ok(agency2);
 
         }
 
         [HttpGet]
         [Route("list")]
+        //[Authorize (Roles = "SuperAdmin")]
         public async Task<ActionResult<IEnumerable<Agency>>> ListAgency()
+        {
+            var agencies = await _agencyService.ListAgencyAsync();
+
+            return Ok(agencies);
+
+        }
+
+        [HttpGet]
+        [Route("list/filters")]
+         public async Task<ActionResult<IEnumerable<Agency>>> ListAgencyFilters([FromQuery]AgencyFilters? filters,
+         [FromQuery] int pageSize = int.MaxValue,
+         [FromQuery] int currentPage = 1)
         {
             var agencies = await _agencyService.ListAgencyAsync();
 
@@ -70,6 +85,24 @@ namespace TravelAgency.Api.Controllers
         public async Task<IActionResult> DeleteAgency(int agencyId)
         {
             await _agencyService.DeleteAgencyByIdAsync(agencyId);
+           return Ok();
+        }
+
+        [HttpPost]
+        [Route("addoffer")]
+
+        public async Task<IActionResult> AddOffersAgency(AddOfferDto addOfferDto)
+        {
+            await _agencyService.AddOffers(addOfferDto);
+           return Ok();
+        }
+
+        [HttpDelete]
+        [Route("deleteoffer")]
+
+        public async Task<IActionResult> DeleteOffersAgency(int agencyofferId)
+        {
+            await _agencyService.DeleteOffers(agencyofferId);
            return Ok();
         }
        

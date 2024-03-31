@@ -9,6 +9,6 @@ namespace TravelAgency.Infrastructure.DataAccess.IRepository
 {
     public interface IHotelRepository:IGenericRepository<Hotel>
     {
-          
+    
     }
 }

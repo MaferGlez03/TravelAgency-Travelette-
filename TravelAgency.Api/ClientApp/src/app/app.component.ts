@@ -1,40 +1,48 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
-import {RouterModule} from '@angular/router'
-import {AdminComponent} from './admin/admin.component'
-import {HomePaqueteComponent} from './home-paquete/home-paquete.component'
-import {HomeOfertaComponent} from './home-oferta/home-oferta.component'
-import {HomeExcursionComponent} from './home-excursion/home-excursion.component'
-import {HeaderComponent} from './header/header.component'
-import {FooterComponent} from './footer/footer.component'
-import { RegisterService } from './Services/register.service';
+import { Component, NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router'
+import { HeaderComponent } from './header/header.component'
+import { FooterComponent } from './footer/footer.component'
+import { HomeComponent } from './home/home.component';
+import { HotelOffersComponent } from './hotel-offers/hotel-offers.component';
+import { HeaderInComponent } from './header/header-in/header-in.component';
+import { HotelOfferBookingComponent } from './hotel-offers/hotel-offer-booking/hotel-offer-booking.component';
+import { CommonModule } from '@angular/common';
+import { IdService } from './Services/MovimientoDatos/id.service';
+
 
 @Component({
-  selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, 
-            LoginComponent, 
-            SignupComponent, 
-            RouterModule, 
-            AdminComponent, 
-            HomePaqueteComponent, 
-            HomeOfertaComponent, 
-            HomeExcursionComponent, 
-            HeaderComponent, 
-            FooterComponent],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+    selector: 'app-root',
+    standalone: true,
+    templateUrl: './app.component.html',
+    styleUrl: './app.component.css',
+    imports: [
+        CommonModule,
+        RouterModule,
+        HeaderComponent,
+        HeaderInComponent,
+        FooterComponent,
+        HomeComponent,
+        HotelOffersComponent,
+        HotelOfferBookingComponent,
+    ]
 })
-export class AppComponent implements OnInit{
-  register = inject(RegisterService)
-  
-  ngOnInit(): void {
-    this.register.getRegister().subscribe((data) => (data));
-  }
-  title = 'travelette';
+export class AppComponent {
+    title = 'Travelette'
 
+    postData = {
+        name: '',
+        address: '',
+        fax: '',
+        electronicAddress: ''
+    }
+
+    isRegistered = false;
+    isNotRegistered = true;
+
+    constructor(private IdService: IdService) {
+        this.IdService.isRegistered.subscribe(isRegistered => {
+            this.isRegistered = isRegistered;
+        })
+        this.isNotRegistered = false;
+    }
 }
-
-

@@ -1,32 +1,23 @@
-import { HttpClient } from '@angular/common/http';
-import { Injectable, Optional, inject } from '@angular/core';
-import { IApiResponseRegister } from './Models/register.interface';
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { IApiRegister } from './Models/listAgency.interface';
+import { tap } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class RegisterService {
-  URL_REGISTER = 'http://localhost:5094/api/identity/register';
-  // URL_REGISTER = 'https://fakestoreapi.com/auth/login';
+    private url = 'http://localhost:5094/api/identity/register'
 
-  httpClient = inject(HttpClient)
+    constructor(private http: HttpClient) { }
 
-  constructor() {
-    console.log('RegisterService');
-  }
-
-  
-
-  getRegister(){
-
-    let data: IApiResponseRegister = {
-      id: '123',
-      userName: 'nombreDeUsuario',
-      email: 'correo@ejemplo.com',
-      nacionality: 'Cuba',
-      password: 'contraseñaSegura123'
-  };
-
-    return this.httpClient.post<IApiResponseRegister>(this.URL_REGISTER, data);
-  }
+    registerPost(data: IApiRegister) {
+        const headers = new HttpHeaders({
+            'Content-Type': 'application/json',
+            'Accept': 'text/plain'
+        })
+        return this.http.post(this.url, data, { headers, responseType: 'text' }).pipe(tap(res => {
+            localStorage.setItem('access_token', res);
+        }))
+    }
 }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -27,26 +28,53 @@ namespace TravelAgency.Application.ApplicationServices.Services
             _jwtTokenGenerator = jwtTokenGenerator;
         }
 
-        public async Task<bool> CheckCredentialsAsync(LoginDto userDto)
+        public async Task<(bool, string)> CheckCredentialsAsync(LoginDto userDto)
         {
             var user = _mapper.Map<User>(userDto);
-            if (user == null) return false;
+            if (user == null) return (false, "");
             var savedUser = await _identityManager.CheckCredentialsAsync(user.UserName!, userDto.Password);
-            if (savedUser) return savedUser;
-            return false;
+            if (savedUser)
+            {
+                var userId = _identityManager.ListUsersAsync().FirstOrDefault(x => x.UserName == user.UserName)!.Id;
+                var adminRole = await _identityManager.IsInRoleAsync(userId, Role.Admin);
+                var superAdminRole = await _identityManager.IsInRoleAsync(userId, Role.SuperAdmin);
+                var touristRole = await _identityManager.IsInRoleAsync(userId, Role.Tourist);
+
+                if (adminRole)
+                {
+                    var token = _jwtTokenGenerator.GenerateToken(user, Role.Admin);
+                    return (savedUser, token);
+                }
+                else if (superAdminRole)
+                {
+                    var token = _jwtTokenGenerator.GenerateToken(user, Role.SuperAdmin);
+                    return (savedUser, token);
+                }
+                else
+                {
+                    var token = _jwtTokenGenerator.GenerateToken(user, Role.Tourist);
+                    return (savedUser, token);
+                }
+
+            }
+            return (false, "Your credentials are incorrect");
         }
 
-        public async Task<string> CreateUserAsync(RegisterDto userDto)
+        public async Task<(string,string)> CreateUserAsync(RegisterDto userDto)
         {
-            //!I have to return more things.
+           
             var user = _mapper.Map<User>(userDto);
             var savedUser = await _identityManager.CreateUserAsync(user, userDto.Password);
             await _identityManager.AddRoles(savedUser.Id, userDto.role);
             await _touristService.CreateTouristAsync(savedUser);
-            var token = _jwtTokenGenerator.GenerateToken(savedUser);
+            var token = _jwtTokenGenerator.GenerateToken(savedUser, userDto.role);
+            return (token, savedUser.Id.ToString());
+        }
 
-
-           return token;
+        public  IEnumerable<User> ListUsersAsync()
+        {
+            var users =  _identityManager.ListUsersAsync();
+            return users;
         }
     }
 }

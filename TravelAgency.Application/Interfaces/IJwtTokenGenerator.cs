@@ -9,6 +9,6 @@ namespace TravelAgency.Application.Interfaces
 {
     public interface IJwtTokenGenerator
     {
-        public string GenerateToken(User user);
+        public string GenerateToken(User user, string userRole);
     }
 }

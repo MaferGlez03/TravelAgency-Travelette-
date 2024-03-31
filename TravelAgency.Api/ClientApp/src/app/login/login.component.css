@@ -1,17 +1,17 @@
 .login {
     padding: 0.5rem;
-    margin-top: 5.5rem;
 }
 
 .container {
+    margin-top: 5.5rem;
     background-color: #fd9effa2;
     padding: 1.5rem;
+    border: 0.2rem solid black;
     border-radius: 0.5rem;
     display: flex;
     width: 32rem;
     flex-direction: column;
     align-items: flex-start;
-    gap: 3rem;
 }
 
 .text-container {
@@ -24,8 +24,6 @@
 
 .Login-text {
     color: #000;
-    /* TradeGothic/Bold/40px */
-    font-family: "TradeGothic LT Extended";
     font-size: 2.5rem;
     font-style: normal;
     font-weight: 700;
@@ -34,8 +32,6 @@
 
 .login-subtext {
     color: var(--Blackish-Green, #121);
-    /* Montserrat/Regular/16px */
-    font-family: Montserrat;
     font-size: 1rem;
     font-style: normal;
     font-weight: 400;
@@ -46,11 +42,10 @@
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 2.5rem;
     align-self: stretch;
 }
 
-.block{
+.block {
     display: flex;
     width: 32rem;
     height: 3.5rem;
@@ -59,14 +54,17 @@
     border-radius: 0.25rem 0.25rem 0rem 0rem;
 }
 
-.textbox{
+.textbox {
     display: flex;
     width: 90%;
     height: 3rem;
-
+    background-color: #FEC1FF;
+    border-color: #000;
+    border-width: 0.1rem;
+    border-radius: 0.5rem;
 }
 
-.Text{
+.Text {
     display: flex;
     align-items: center;
     position: relative;
@@ -76,52 +74,70 @@
 .password-options {
     display: flex;
     flex-direction: row;
-    align-items: flex-start;
-    gap: 1rem;
+    align-items: end;
     width: 100%;
+    gap: 13rem;
 }
 
-.simple-text{
+.remember {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+#Remember {
+    padding-top: 0.9rem;
+}
+
+.simple-text {
     color: var(--Blackish-Green, #121);
-    /* Montserrat/Medium/14px */
-    font-family: Montserrat;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
 }
 
-.link-text{
+.link-text {
     color: var(--Slamon, #FF8682);
-    font-family: Montserrat;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     justify-content: flex-end;
+    padding-left: 0.3rem;
 }
 
-.buttons-block{
+.buttons-block {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
     width: 100%;
+    align-items: center;
 }
 
-.button{
+.button {
     display: flex;
-    width: 100%;
+    width: 60%;
     flex-direction: column;
     align-items: center;
     gap: 0.625rem;
     border-radius: 0.5rem;
     justify-content: center;
+    background-color: #fff;
 }
 
-.minifooter{
+.minifooter {
     display: flex;
     flex-direction: row;
     justify-content: center;
     width: 100%;
+}
+
+.eye {
+    width: 1rem;
+    display: flex;
+    position: relative;
+    left: 27rem;
+    top: -3.8rem;
 }

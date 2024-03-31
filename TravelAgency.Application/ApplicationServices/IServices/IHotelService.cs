@@ -11,7 +11,7 @@ namespace TravelAgency.Application.ApplicationServices.IServices
     {
         Task<HotelDto> CreateHotelAsync(HotelDto hotelDto);
         Task<HotelDto> UpdateHotelAsync(HotelDto hotelDto);
-        Task<IEnumerable<HotelDto>> ListHotelAsync();
+        Task<IEnumerable<HotelResponseDto>> ListHotelAsync();
         Task DeleteHotelByIdAsync(int hotelDto);
     }
 }

@@ -26,8 +26,9 @@ namespace TravelAgency.Application.ApplicationServices.Services
         {
             //!MAYBE I SHOULD ADD THE OFFER CREATED TO THE CORRESPOND HOTEL LIST.
             var lodgingOffer = _mapper.Map<Domain.Entities.LodgingOffer>(lodgingOfferDto);
-            lodgingOffer.Hotel = _hotelrepository?.GetById(lodgingOffer.HotelId);
             var _lodgingOffer = await _lodgingOfferRepository!.CreateAsync(lodgingOffer);
+            var hotel =_hotelrepository!.GetById(_lodgingOffer.HotelId);
+            hotel.lodgingOffers.Add(_lodgingOffer);
             return _mapper.Map<LodgingOfferDto>(_lodgingOffer);
         }
 
@@ -38,13 +39,14 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
         public async Task<IEnumerable<LodgingOfferDtoResponse>> ListLodgingOfferAsync()
         {
-            //!HERE I NEED TO FIX THE REPONSE.
-            var lodgingOffers = await _lodgingOfferRepository!.ListAsync();
+            //!PROBLEMS TO SHOW HOTEL PROPERTIES.
+            var lodgingOffers = _lodgingOfferRepository!.GetLodgingOffers();
             var list = lodgingOffers.ToList();
             List<LodgingOfferDtoResponse> lodgingOffersfinal = new();
             for (int i = 0; i < lodgingOffers.Count(); i++)
             {
                 lodgingOffersfinal.Add(_mapper.Map<LodgingOfferDtoResponse>(list[i]));
+              
             }
             return lodgingOffersfinal;
         }

@@ -70,10 +70,15 @@ namespace TravelAgency.Infrastructure
         {
             //Default Role
             var superadminRole = new IdentityRole(Role.SuperAdmin);
+            var touristRole = new IdentityRole(Role.Tourist);
 
             if (_roleManager.Roles.All(r => r.Name != superadminRole.Name))
             {
                 await _roleManager.CreateAsync(superadminRole);
+            }
+            if (_roleManager.Roles.All(r => r.Name != touristRole.Name))
+            {
+                await _roleManager.CreateAsync(touristRole);
             }
 
             //Default User

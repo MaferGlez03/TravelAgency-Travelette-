@@ -1,55 +1,28 @@
-.paquetes {
-    padding: 0.5rem;
-    margin-top: 0.5rem;
-    /* background-color: red; */
-    width: 90vw;
-    height: 50vh;
-}
-
-.container{
+.container {
     display: flex;
     align-items: flex-start;
     gap: 1.5rem;
 }
 
-.pkg{
-    background-size: cover;
+@font-face {
+    font-family: 'Barbie';
+    src: url('./assets/fonts/Bartex.ttf') format('woff');
 }
 
-#pkg1{
-    background-image: url('/assets/img/avion.jpeg');
+@font-face {
+    font-family: 'Barbie2';
+    src: url('./assets/fonts/barbie.ttf') format('woff');
 }
 
-#pkg2{
-    background-image: url('/assets/img/escalando.jpeg');   
+@font-face {
+    font-family: All;
+    src: url('./assets/fonts/PTSerif-Regular.ttf');
 }
 
-/* .Title{
-    color: #000; */
-    /* TradeGothic/Bold/40px */
-    /* font-family: "TradeGothic LT Extended";
-    font-size: 2.5rem;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-} */
+* {
+    font-family: 'All', sans-serif;
+}
 
-/* .parrafo{
-    color: var(--Blackish-Green, #121);
-    Montserrat/Medium/14px
-    font-family: Montserrat;
-    font-size: 0.875rem;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-} */
-
-.show-button{
-    display: flex;
-    width: 100%;
-    flex-direction: column;
-    align-items: center;
-    gap: 0.625rem;
-    border-radius: 0.5rem;
-    justify-content: center;
+h1 {
+    font-family: 'Barbie', sans-serif;
 }

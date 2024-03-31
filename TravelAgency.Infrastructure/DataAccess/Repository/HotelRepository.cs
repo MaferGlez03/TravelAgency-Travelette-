@@ -15,6 +15,5 @@ namespace TravelAgency.Infrastructure.DataAccess.Repository
             
         }
         
-       
     }
 }
