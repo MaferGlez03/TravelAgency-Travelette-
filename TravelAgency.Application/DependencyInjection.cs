@@ -16,20 +16,22 @@ using TravelAgency.Application.Interfaces;
 namespace TravelAgency.Application
 {
     public static class DependencyInjection
-    {
-
+{
+    
         public static void AddApplicationServices(this IServiceCollection services, ConfigurationManager configurationManager)
-        {
+    {
             services.Configure<JwtSettings>(configurationManager.GetSection(JwtSettings.SECTION_NAME));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             services.AddScoped<IIdentityService, IdentityService>();
             services.AddScoped<IAgencyService, AgencyService>();
             services.AddScoped<IHotelService, HotelService>();
             services.AddScoped<ITouristService, TouristService>();
-            services.AddScoped<IFacilityService, FacilityService>();
+            services.AddScoped<IFacilityService, FacilityService>();       
             services.AddScoped<ILodgingOfferService, LodgingOfferService>();
             services.AddScoped<IExcursionService, ExcursionService>();
-            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
+            services.AddScoped<IPackageService, PackageService>();
+            services.AddScoped<IExtendedExcursionService, ExtendedExcursionService>();       
+            services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();       
 
             //JwtToken configuration.
             services.AddAuthentication(options =>
@@ -50,6 +52,6 @@ namespace TravelAgency.Application
                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configurationManager.GetSection("JwtSettings:Secret").Value!))
                };
            });
-        }
     }
+}
 }

@@ -8,6 +8,7 @@ using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Identity;
@@ -47,7 +48,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
              CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDtoResponse>()
              .ForMember(x=>x.hotelDto, o=>o.MapFrom(c=>c.Hotel!));
 
-             
+
+             CreateMap<PackageDto, Domain.Entities.Package>();
+             CreateMap<Domain.Entities.Package, PackageDto>();
 
 
         }

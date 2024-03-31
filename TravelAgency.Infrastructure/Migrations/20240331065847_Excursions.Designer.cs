@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAgency.Infrastructure;
 
@@ -11,9 +12,11 @@ using TravelAgency.Infrastructure;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    partial class TravelAgencyContextModelSnapshot : ModelSnapshot
+    [Migration("20240331065847_Excursions")]
+    partial class Excursions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -189,7 +192,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Agencies");
-                    b.ToTable("Agencies");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Excursion", b =>
@@ -216,11 +218,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<string>("DeparturePlace")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasMaxLength(21)
-                        .HasColumnType("nvarchar(21)");
 
                     b.Property<string>("Guia")
                         .IsRequired()
@@ -256,7 +253,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Facilities");
-                    b.ToTable("Facilities");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Hotel", b =>
@@ -285,7 +281,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("Hotels");
-                    b.ToTable("Hotels");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.LodgingOffer", b =>
@@ -295,9 +290,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("Availability")
-                        .HasColumnType("int");
 
                     b.Property<int>("Availability")
                         .HasColumnType("int");
@@ -322,6 +314,66 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.ToTable("LodgingOffers");
                 });
 
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AgencyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgencyID");
+
+                    b.ToTable("Packages");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.PackageFacility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilityId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("PackagesFacilities");
+                });
+
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
                 {
                     b.Property<int>("Id")
@@ -343,7 +395,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tourists");
                     b.ToTable("Tourists");
                 });
 
@@ -371,7 +422,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("AgencyId", "LodgingOfferId")
                         .IsUnique();
 
-                    b.ToTable("AgencyOffers");
                     b.ToTable("AgencyOffers");
                 });
 
@@ -441,16 +491,6 @@ namespace TravelAgency.Infrastructure.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
-                });
-
-            modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
-                {
-                    b.HasBaseType("TravelAgency.Domain.Entities.Excursion");
-
-                    b.Property<int>("NumberOfDays")
-                        .HasColumnType("int");
-
-                    b.HasDiscriminator().HasValue("ExtendedExcursion");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

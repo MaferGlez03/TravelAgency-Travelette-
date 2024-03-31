@@ -18,7 +18,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
         private readonly IAgencyOfferRepository _agencyOfferRepository;
         private readonly IAgencyRepository _agencyRepository;
-        private readonly IMapper _mapper;
+                private readonly IMapper _mapper;
 
         public AgencyService(IAgencyRepository agencyRepository, IMapper mapper, IAgencyOfferRepository agencyOfferRepository)
         {
@@ -59,7 +59,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
         public async Task DeleteAgencyByIdAsync(int agencyDto)
         {
-            await _agencyRepository.DeleteByIdAsync(agencyDto);
+                        await _agencyRepository.DeleteByIdAsync(agencyDto);
         }
 
         public async Task DeleteOffers(int agencyOfferId)
