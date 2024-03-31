@@ -1,0 +1,137 @@
+.homeOferta {
+    margin-top: 7.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.titles {
+    display: flex;
+    width: 1062px;
+    align-items: center;
+    gap: 24px;
+}
+
+.titles2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+h1 {
+    height: 36px;
+    align-self: stretch;
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+h3 {
+    width: 551px;
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    border: 1px solid black;
+    background-color: #FEC1FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.body {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.block {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url("../../../assets/img/HotelPiscina.png");
+    background-size: cover;
+    width: 255px;
+    height: 420px;
+}
+
+.info {
+    display: flex;
+    flex-direction: column;
+    margin-top: 230px;
+}
+
+.textInfo {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+}
+
+.texts {
+    display: flex;
+    width: 230px;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+h2 {
+    align-self: stretch;
+    color: var(--Neutrals, #FFF);
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+h4 {
+    align-self: stretch;
+    color: var(--Neutrals, #FFF);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.oferta {
+    display: flex;
+    height: 48px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    align-self: stretch;
+    border-radius: 4px;
+    border: 1px solid black;
+    background-color: #FEC1FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.button {
+    border: 1px solid black;
+    background-color: #FEC1FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

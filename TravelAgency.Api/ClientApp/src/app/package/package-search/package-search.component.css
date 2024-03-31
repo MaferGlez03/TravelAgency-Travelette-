@@ -1,0 +1,33 @@
+.excursion-search {
+    display: flex;
+    flex-direction: column;
+    width: 1030px;
+}
+
+.search-inputs {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    align-self: stretch;
+}
+
+.input {
+    display: flex;
+    flex-direction: column;
+    color: #1C1B1F;
+}
+
+.btn {
+    display: flex;
+    width: 56px;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid black;
+    background-color: #FEC1FF;
+    border-radius: 0.5rem;
+}
+
+.text {
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,53 @@
+.body-up {
+    display: flex;
+    width: 840px;
+    padding: 16px 24px;
+    align-items: center;
+    gap: 24px;
+    border-radius: 12px;
+    background-color: #FEC1FF;
+}
+
+.category {
+    display: flex;
+    width: 160px;
+    flex-direction: column;
+}
+
+.title {
+    font-weight: 600;
+    margin-bottom: 0.4rem;
+}
+
+.category-subtitle {
+    display: flex;
+    gap: 4px;
+}
+
+.text {
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.line {
+    width: 1px;
+    height: 48px;
+    background-color: #9f7e9f;
+}
+
+.category-button {
+    display: flex;
+    width: 160px;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.category-button-text {
+    display: flex;
+    margin-top: 1rem;
+}
+
+.other {
+    font-weight: 500;
+}

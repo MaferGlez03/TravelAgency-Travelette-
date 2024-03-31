@@ -1,0 +1,25 @@
+<div class="homeOferta">
+    <div class="titles">
+        <div class="titles2">
+            <h1>Seasonal Getaway Deals</h1>
+            <h3>Whether you’re heading home or exploring new horizons, we’ve got the best hotel deals to enhance your
+                journey. Experience comfort, luxury, and savings all in one place. Book now and make your trip
+                unforgettable. </h3>
+        </div>
+        <button class="button" routerLink="../hotel">See more hotels</button>
+    </div>
+    <div class="body">
+        <div class="block" *ngFor="let item of products| slice:0:4">
+            <!-- <img src="../../assets/img/HotelPiscina.png" alt="hotel1"> -->
+            <div class="info">
+                <div class="texts">
+                    <h2>{{item.name}}</h2>
+                    <h2> $500</h2>
+                    <h4>{{item.category}}</h4>
+                    <h4>{{item.address}}</h4>
+                </div>
+                <button class="oferta" routerLink="../hotel/booking">Book Hotel</button>
+            </div>
+        </div>
+    </div>
+</div>

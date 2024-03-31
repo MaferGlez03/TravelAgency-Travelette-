@@ -1,0 +1,138 @@
+.HomePaqueteMain {
+    margin-top: 5.5rem;
+}
+
+.HomePaquete {
+    display: flex;
+    width: 1062;
+    align-items: flex-start;
+    gap: 24px;
+}
+
+.superblock {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.Titles {
+    display: flex;
+    width: 1062px;
+    align-items: center;
+    gap: 24px;
+}
+
+.Titles2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.h1Nor {
+    height: 36px;
+    align-self: stretch;
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.h2Nor {
+    align-self: stretch;
+    color: var(--Blackish-Green, #121);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.block {
+    width: 519px;
+    height: 559px;
+    flex-shrink: 0;
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);    /* Cards Shadow */
+}
+
+img {
+    width: 519px;
+    height: 559px;
+    flex-shrink: 0;
+    border-radius: 20px;
+    background: lightgray -1.02px 0px / 123.536% 100% no-repeat;
+}
+
+.body {
+    width: 519px;
+    height: 280px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: 280px;
+}
+
+.rectangle {
+    width: 519px;
+    height: 280px;
+    flex-shrink: 0;
+    border-radius: 0px 0px 24px 24px;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.00) 0%, rgba(18, 18, 18, 0.75) 48.67%);
+}
+
+.body2 {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    position: relative;
+    bottom: 204px;
+    width: 100%;
+}
+
+.texts {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+}
+
+.h1Esp {
+    width: 389px;
+    color: var(--Neutrals, #FFF);
+    text-align: center;
+    font-size: 40px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.h2Esp {
+    width: 389px;
+    color: var(--Neutrals, #FFF);
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.button {
+    display: flex;
+    height: 40px;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 4px;
+    border-radius: 4px;
+    border: 1px solid black;
+    background-color: #FEC1FF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

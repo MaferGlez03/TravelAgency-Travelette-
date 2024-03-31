@@ -1,0 +1,225 @@
+.container {
+    margin-top: 5.5rem;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titlebar {
+    display: flex;
+    width: 50rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    justify-self: center;
+    justify-items: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.titledetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.pricebox {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--Blackish-Green, #121);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.location {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+}
+
+.location-img {
+    width: 1.125rem;
+    height: 1.125rem;
+}
+
+.location-text {
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.price {
+    color: var(--Slamon, #ff8682);
+    text-align: right;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.btns-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9375rem;
+}
+
+.buy-btn {
+    display: flex;
+    width: 9.375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    background: var(--Mint-Green, #fec1ff);
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.mainimg {
+    width: 50rem;
+    height: 24.6875rem;
+    flex-shrink: 0;
+    border-radius: 0.75rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.description-box {
+    display: flex;
+    width: 50rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    margin-top: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+    justify-content: center;
+}
+
+.description-imgs {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+    align-self: stretch;
+}
+
+.description-imgs-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+    color: var(--Blackish-Green, #121);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.imgs {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-self: stretch;
+}
+
+.img1 {
+    display: flex;
+    width: 7.5rem;
+    height: 7.5rem;
+    padding: 1rem;
+    align-items: flex-start;
+    border-radius: 1.75rem;
+}
+
+.warning-box {
+    display: flex;
+    padding: 1rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+    border-radius: 0.5rem;
+    background: #fec1ff;
+}
+
+.warning-title {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.warnings {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+.warning1 {
+    display: flex;
+    width: 35.6875rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.warning2 {
+    display: flex;
+    width: 31.75rem;
+    align-items: center;
+    gap: 1rem;
+}
+
+.watch {
+    width: 1.5rem;
+    height: 1.5rem;
+    flex-shrink: 0;
+}
+
+.warning-text {
+    flex: 1 0 0;
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.booking {
+    width: 800px;
+}

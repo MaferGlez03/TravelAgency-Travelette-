@@ -1,0 +1,33 @@
+<div class="updates">
+    <div class="updatetitle">
+        <h1>Update</h1>
+    </div>
+
+    <div class="add" *ngIf="currentdata === 'addAgency'">
+        <div class="containerA">
+            <h1 class="titleA">Add Agency</h1>
+            <div class="bodyA">
+                <div class="topA">
+                    <img class="imageA" src="../../assets/img/agency.jpg" />
+                    <div class="NombreA">
+                        <div class="nameA">Nombre</div>
+                        <input class="textboxA" type="text" id="Nombre">
+                        <div class="addressA">Fax</div>
+                        <input class="textboxA" type="text" id="Fax">
+                    </div>
+                </div>
+                <div class="bottomA">
+                    <div class="categoryA">Correo electrónico</div>
+                    <input class="textboxA EA" type="text" id="Email">
+                    <div class="addressA">Dirección</div>
+                    <input class="textboxA EA" type="text" id="Direccion">
+                </div>
+            </div>
+            <div class="bottom-line"></div>
+            <div class="buttons-boxA">
+                <button class="buttonA add-btnA" (click)="createAgencyPost()">Añadir Agencia</button>
+                <button class="buttonA close-btnA" (click)="showNothing()">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>

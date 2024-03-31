@@ -1,0 +1,4 @@
+<app-header *ngIf="!isRegistered" style="position: absolute; top: 0rem;"></app-header>
+<app-header-in *ngIf="isRegistered"></app-header-in>
+<router-outlet></router-outlet>
+<app-footer></app-footer>

@@ -1,0 +1,28 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+@font-face {
+    font-family: 'Barbie';
+    src: url('./assets/fonts/Bartex.ttf') format('woff');
+}
+
+@font-face {
+    font-family: 'Barbie2';
+    src: url('./assets/fonts/barbie.ttf') format('woff');
+}
+
+@font-face {
+    font-family: All;
+    src: url('./assets/fonts/PTSerif-Regular.ttf');
+}
+
+* {
+    font-family: 'All', sans-serif;
+}
+
+h1 {
+    font-family: 'Barbie', sans-serif;
+}

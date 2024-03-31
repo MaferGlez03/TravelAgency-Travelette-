@@ -1,0 +1,28 @@
+<div class="HomeExcursion">
+    <div class="Titles">
+        <div class="Titles2">
+            <h1>Plan your perfect trip</h1>
+            <h2>Search Excursions & Places Hire to our most popular destinations</h2>
+        </div>
+        <button class="button" routerLink="../excursion">See more excursions</button>
+    </div>
+    <div class="Body">
+        <div class="block" *ngFor="let item of products">
+            <div class="Rectangle" routerLink="../excursion/booking">
+                <div class="blockImg">
+                    <img src="../../../assets/img/cayo-santa-maria.jpg" alt="agecia1">
+                </div>
+                <div class="blockText">
+                    <p class="agencyName" id="AgNa1">{{item.name}}</p>
+                    <div class="details">
+                        <p class="detail">Tropical </p>
+                        <p class="detail separator">•</p>
+                        <p class="detail">Island </p>
+                        <p class="detail separator">•</p>
+                        <p class="detail">Paradise</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,143 @@
+.login {
+    padding: 0.5rem;
+}
+
+.container {
+    margin-top: 5.5rem;
+    background-color: #fd9effa2;
+    padding: 1.5rem;
+    border: 0.2rem solid black;
+    border-radius: 0.5rem;
+    display: flex;
+    width: 32rem;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+.Login-text {
+    color: #000;
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.login-subtext {
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.components-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.block {
+    display: flex;
+    width: 32rem;
+    height: 3.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 0.25rem 0.25rem 0rem 0rem;
+}
+
+.textbox {
+    display: flex;
+    width: 90%;
+    height: 3rem;
+    background-color: #FEC1FF;
+    border-color: #000;
+    border-width: 0.1rem;
+    border-radius: 0.5rem;
+}
+
+.Text {
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -3.1rem;
+}
+
+.password-options {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    width: 100%;
+    gap: 13rem;
+}
+
+.remember {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+}
+
+#Remember {
+    padding-top: 0.9rem;
+}
+
+.simple-text {
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.link-text {
+    color: var(--Slamon, #FF8682);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    justify-content: flex-end;
+    padding-left: 0.3rem;
+}
+
+.buttons-block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+}
+
+.button {
+    display: flex;
+    width: 60%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.minifooter {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.eye {
+    width: 1rem;
+    display: flex;
+    position: relative;
+    left: 27rem;
+    top: -3.8rem;
+}
