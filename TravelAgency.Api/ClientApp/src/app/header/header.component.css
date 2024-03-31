@@ -1,0 +1,183 @@
+.header-default {
+  width: 100%;
+  height: 60px;
+  padding: 21px 104px;
+  background: #fd9effa2; /*color traslucido*/ 
+  /*background: #FEC1FF; /*color no traslucido*/
+  box-shadow: 0px 4px 16px rgba(17, 34, 17, 0.05);
+  justify-content: space-between;
+  align-items: center;
+  display: flex;
+  position:fixed;
+  left: 0;
+  right: 0;
+  border-bottom: 0.2rem solid black;
+}
+
+.header-main {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 100px;
+  display: flex;
+}
+
+.offers-btns {
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 32px;
+  display: flex;
+}
+
+.package {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.package-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.airplane {
+  width: 22.5px;
+  height: 19.5px;
+  left: 0.75px;
+  top: 2.25px;
+  position: absolute;
+}
+
+.package-text {
+  color: #112211;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.hotel {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.hotel-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.bed {
+  width: 21px;
+  height: 16.5px;
+  left: 1.5px;
+  top: 3.75px;
+  position: absolute;
+}
+
+.hotel-text {
+  color: #112211;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.excursion {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 4px;
+  display: flex;
+}
+
+.excursion-icon {
+  width: 24px;
+  height: 24px;
+  position: relative;
+}
+
+.bicycle {
+  width: 21px;
+  height: 16.5px;
+  left: 1.5px;
+  top: 3.75px;
+  position: absolute;
+}
+
+.excursion-text {
+  color: #112211;
+  font-size: 16px;
+  font-family: Montserrat;
+  font-weight: 600;
+  word-wrap: break-word;
+}
+
+.logo {
+  width: 110.35px;
+  height: 36px;
+  position: relative;
+}
+
+.logo-img {
+  width: 110.36px;
+  height: 36px;
+  left: 0px;
+  top: 0px;
+  position: absolute;
+  text-align: left;
+  font-size:20px;
+}
+
+.header-btns {
+  justify-content: flex-start;
+  align-items: center;
+  gap: 32px;
+  display: flex;
+}
+
+.login-btn {
+  color: #112211;
+  font-size: 18px;
+  font-family: Montserrat;
+  font-weight: 600;
+  word-wrap: break-word;
+  text-decoration: none;
+}
+
+.signup-btn-container {
+  height: 48px;
+  background: #112211;
+  border-radius: 8px;
+  overflow: hidden;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+}
+
+.signup-btn {
+  align-self: stretch;
+  flex: 1 1 0;
+  padding-left: 24px;
+  padding-right: 24px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  display: inline-flex;
+}
+
+.signup-text {
+  text-align: center;
+  color: white;
+  font-size: 14px;
+  font-family: Montserrat;
+  font-weight: 600;
+  word-wrap: break-word;
+  text-decoration: none;
+}

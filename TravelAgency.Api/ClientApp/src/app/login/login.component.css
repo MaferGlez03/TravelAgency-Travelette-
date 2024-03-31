@@ -1,0 +1,127 @@
+.login {
+    padding: 0.5rem;
+    margin-top: 5.5rem;
+}
+
+.container {
+    background-color: #fd9effa2;
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    display: flex;
+    width: 32rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+}
+
+.text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    align-self: stretch;
+}
+
+.Login-text {
+    color: #000;
+    /* TradeGothic/Bold/40px */
+    font-family: "TradeGothic LT Extended";
+    font-size: 2.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.login-subtext {
+    color: var(--Blackish-Green, #121);
+    /* Montserrat/Regular/16px */
+    font-family: Montserrat;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
+
+.components-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2.5rem;
+    align-self: stretch;
+}
+
+.block{
+    display: flex;
+    width: 32rem;
+    height: 3.5rem;
+    flex-direction: column;
+    align-items: flex-start;
+    border-radius: 0.25rem 0.25rem 0rem 0rem;
+}
+
+.textbox{
+    display: flex;
+    width: 90%;
+    height: 3rem;
+
+}
+
+.Text{
+    display: flex;
+    align-items: center;
+    position: relative;
+    top: -3.1rem;
+}
+
+.password-options {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.simple-text{
+    color: var(--Blackish-Green, #121);
+    /* Montserrat/Medium/14px */
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.link-text{
+    color: var(--Slamon, #FF8682);
+    font-family: Montserrat;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    justify-content: flex-end;
+}
+
+.buttons-block{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+}
+
+.button{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    justify-content: center;
+}
+
+.minifooter{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
