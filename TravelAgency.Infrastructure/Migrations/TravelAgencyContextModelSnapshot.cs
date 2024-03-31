@@ -188,7 +188,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Agencies", (string)null);
+                    b.ToTable("Agencies");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Excursion", b =>
@@ -229,7 +229,7 @@ namespace TravelAgency.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Excursions", (string)null);
+                    b.ToTable("Excursions");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Facility", b =>
@@ -249,7 +249,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Facilities", (string)null);
+                    b.ToTable("Facilities");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Hotel", b =>
@@ -277,7 +277,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Hotels", (string)null);
+                    b.ToTable("Hotels");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.LodgingOffer", b =>
@@ -287,6 +287,9 @@ namespace TravelAgency.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("Availability")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -305,7 +308,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Id", "HotelId")
                         .IsUnique();
 
-                    b.ToTable("LodgingOffers", (string)null);
+                    b.ToTable("LodgingOffers");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
@@ -329,7 +332,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("Name")
                         .IsUnique();
 
-                    b.ToTable("Tourists", (string)null);
+                    b.ToTable("Tourists");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Relations.AgencyOffer", b =>
@@ -356,7 +359,7 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasIndex("AgencyId", "LodgingOfferId")
                         .IsUnique();
 
-                    b.ToTable("AgencyOffers", (string)null);
+                    b.ToTable("AgencyOffers");
                 });
 
             modelBuilder.Entity("TravelAgency.Infrastructure.Identity.User", b =>
