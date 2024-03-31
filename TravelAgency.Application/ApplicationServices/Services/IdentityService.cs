@@ -36,6 +36,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             if (savedUser)
             {
                 var userId = _identityManager.ListUsersAsync().FirstOrDefault(x => x.UserName == user.UserName)!.Id;
+                user.Id = userId;
                 var adminRole = await _identityManager.IsInRoleAsync(userId, Role.Admin);
                 var superAdminRole = await _identityManager.IsInRoleAsync(userId, Role.SuperAdmin);
                 var touristRole = await _identityManager.IsInRoleAsync(userId, Role.Tourist);

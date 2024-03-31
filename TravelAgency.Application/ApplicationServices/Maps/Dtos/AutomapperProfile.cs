@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
@@ -28,6 +29,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
              CreateMap<AgencyDto, Domain.Entities.Agency>();
              CreateMap<Domain.Entities.Agency, AgencyDto>();
+
+             CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
+             CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
 
              CreateMap<HotelDto, Domain.Entities.Hotel>();
              CreateMap<Domain.Entities.Hotel, HotelDto>();

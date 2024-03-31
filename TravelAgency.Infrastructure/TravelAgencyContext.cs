@@ -20,6 +20,7 @@ namespace TravelAgency.Infrastructure
         public DbSet<LodgingOffer> LodgingOffers { get; set; }
         public DbSet<AgencyOffer> AgencyOffers { get; set; }
         public DbSet<Excursion> Excursions { get; set; }
+        public DbSet<BookOffer> BookOffers { get; set; }
 
         //Override the method to make each Agency's name, Hotel's name and Facility's name unique.
 

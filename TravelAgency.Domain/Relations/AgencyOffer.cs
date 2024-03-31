@@ -14,5 +14,6 @@ namespace TravelAgency.Domain.Relations
         public double Price { get; set; }
         public  LodgingOffer? LodgingOffer { get; set; }
         public  Agency? Agency { get; set; }
+        public IList<BookOffer> BookOffers {get;set;} = new List<BookOffer>();
     }
 }
