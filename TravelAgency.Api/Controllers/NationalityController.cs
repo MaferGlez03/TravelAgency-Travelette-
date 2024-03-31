@@ -13,6 +13,8 @@ namespace TravelAgency.Api.Controllers
     public class NationalityController : ControllerBase
     {
         //!Añadir Get y cambiar el dto de registrarse.
+        [HttpGet]
+        [Route("list")]
         public IActionResult GetNationalities()
         {
             var nationalities = Enum.GetValues(typeof(Nationality))

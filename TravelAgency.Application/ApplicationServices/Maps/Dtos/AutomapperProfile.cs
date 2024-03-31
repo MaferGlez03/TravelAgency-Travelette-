@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
-using TravelAgency.Application.ApplicationServices.Maps.Dtos.AgencyOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
@@ -29,11 +28,6 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
              CreateMap<AgencyDto, Domain.Entities.Agency>();
              CreateMap<Domain.Entities.Agency, AgencyDto>();
-
-             CreateMap<AgencyOfferResponseDto, Domain.Relations.AgencyOffer>();
-             CreateMap<Domain.Relations.AgencyOffer, AgencyOfferResponseDto>()
-             .ForMember(x=>x.agencyDto, o=>o.MapFrom(c=>c.Agency));
-             //.ForPath(x=>x.offers, o=>o.MapFrom(c=>c.Agency.AgencyOffers));
 
              CreateMap<HotelDto, Domain.Entities.Hotel>();
              CreateMap<Domain.Entities.Hotel, HotelDto>();

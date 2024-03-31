@@ -28,7 +28,6 @@ namespace TravelAgency.Application
             services.AddScoped<ITouristService, TouristService>();
             services.AddScoped<IFacilityService, FacilityService>();
             services.AddScoped<ILodgingOfferService, LodgingOfferService>();
-            services.AddScoped<IAgencyOfferService, AgencyOfferService>();
             services.AddScoped<IExcursionService, ExcursionService>();
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 

@@ -70,5 +70,11 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var token = _jwtTokenGenerator.GenerateToken(savedUser, userDto.role);
             return (token, savedUser.Id.ToString());
         }
+
+        public  IEnumerable<User> ListUsersAsync()
+        {
+            var users =  _identityManager.ListUsersAsync();
+            return users;
+        }
     }
 }

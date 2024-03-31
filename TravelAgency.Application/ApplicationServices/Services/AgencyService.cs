@@ -15,13 +15,16 @@ namespace TravelAgency.Application.ApplicationServices.Services
 {
     public class AgencyService : IAgencyService
     {
+
+        private readonly IAgencyOfferRepository _agencyOfferRepository;
         private readonly IAgencyRepository _agencyRepository;
         private readonly IMapper _mapper;
 
-        public AgencyService(IAgencyRepository agencyRepository,IMapper mapper)
+        public AgencyService(IAgencyRepository agencyRepository, IMapper mapper, IAgencyOfferRepository agencyOfferRepository)
         {
             _agencyRepository = agencyRepository;
             _mapper = mapper;
+            _agencyOfferRepository = agencyOfferRepository;
         }
 
         public async Task AddOffers(AddOfferDto addOfferDto)
@@ -59,6 +62,13 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _agencyRepository.DeleteByIdAsync(agencyDto);
         }
 
+        public async Task DeleteOffers(int agencyOfferId)
+        {
+            var agencyOffer = _agencyOfferRepository.GetById(agencyOfferId);
+            var agency = _agencyRepository.GetById(agencyOffer.AgencyId);
+            agency.DeleteOffer(agencyOffer);
+            await _agencyRepository.UpdateAsync(agency);
+        }
 
         public async Task<IEnumerable<AgencyDto>> ListAgencyAsync()
         {

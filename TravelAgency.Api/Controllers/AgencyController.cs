@@ -88,12 +88,21 @@ namespace TravelAgency.Api.Controllers
            return Ok();
         }
 
-         [HttpPost]
+        [HttpPost]
         [Route("addoffer")]
 
         public async Task<IActionResult> AddOffersAgency(AddOfferDto addOfferDto)
         {
             await _agencyService.AddOffers(addOfferDto);
+           return Ok();
+        }
+
+        [HttpDelete]
+        [Route("deleteoffer")]
+
+        public async Task<IActionResult> DeleteOffersAgency(int agencyofferId)
+        {
+            await _agencyService.DeleteOffers(agencyofferId);
            return Ok();
         }
        

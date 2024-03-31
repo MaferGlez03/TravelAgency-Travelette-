@@ -16,5 +16,6 @@ namespace TravelAgency.Application.ApplicationServices.IServices
         Task<IEnumerable<AgencyDto>> ListAgencyAsync();
         Task DeleteAgencyByIdAsync(int agencyDto);
         Task AddOffers(AddOfferDto addOfferDto);
+        Task DeleteOffers(int agencyOfferId);
     }
 }

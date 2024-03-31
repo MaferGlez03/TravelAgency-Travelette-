@@ -36,15 +36,14 @@ namespace TravelAgency.Domain.Entities
             }
 
         }
-        public void DeleteOffers(IEnumerable<AgencyOffer> offers)
+        public void DeleteOffer(AgencyOffer offer)
         {
-            foreach (var offer in offers)
+
+            if (AgencyOffers.Contains(offer))
             {
-                if (AgencyOffers.Contains(offer))
-                {
-                    AgencyOffers.Remove(offer);
-                }
+                AgencyOffers.Remove(offer);
             }
+
         }
         public void CleanOffers()
         {

@@ -26,20 +26,33 @@ namespace TravelAgency.Api.Controllers
 
             var result = await _identityService.CreateUserAsync(registerDto);
             //return Ok(result.Item1);
-            return Ok(new {
-                userId = result.Item1,
-                token = result.Item2
+            return Ok(new
+            {
+                userId = result.Item2,
+                token = result.Item1
             });
         }
 
-        
-           [HttpPost]
-            [Route("login")]
+
+        [HttpPost]
+        [Route("login")]
         public async Task<IActionResult> LogUser(LoginDto loginDto)
         {
             var user = await _identityService.CheckCredentialsAsync(loginDto);
 
-            return Ok(user.Item2);
+             return Ok(new
+            {
+                verificstion = user.Item1,
+                token = user.Item2
+            });
         }
+        [HttpGet]
+        [Route("list")]
+        public async Task<IActionResult> GetUsers()
+        {
+            var users =_identityService.ListUsersAsync();
+            return Ok(users);
+        }
+
     }
 }
