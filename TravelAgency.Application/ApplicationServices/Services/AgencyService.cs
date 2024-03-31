@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.AddOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
 namespace TravelAgency.Application.ApplicationServices.Services
@@ -13,29 +16,47 @@ namespace TravelAgency.Application.ApplicationServices.Services
     public class AgencyService : IAgencyService
     {
         private readonly IAgencyRepository _agencyRepository;
-        private readonly IPackageRepository _packageRepository;
-        private readonly IMapper _mapper;
+                private readonly IMapper _mapper;
 
-        public AgencyService(IPackageRepository packageRepository, IAgencyRepository agencyRepository,IMapper mapper)
+        public AgencyService(IAgencyRepository agencyRepository,IMapper mapper)
         {
             _agencyRepository = agencyRepository;
-            _packageRepository = packageRepository;
-            _mapper = mapper;
+                        _mapper = mapper;
         }
+
+        public async Task AddOffers(AddOfferDto addOfferDto)
+        {
+            var agency = _agencyRepository.GetById(addOfferDto.AgencyId);
+            if (agency is not null)
+            {
+                var newoffers = new List<AgencyOffer>();
+                foreach (var offer in addOfferDto.LodgingOffers)
+                {
+                    newoffers.Add(new AgencyOffer
+                    {
+                        LodgingOfferId = offer.OfferId,
+                        Price = offer.Price
+                    });
+                    
+                }
+                agency.AddOffers(newoffers);
+
+                await _agencyRepository.UpdateAsync(agency);
+
+            }
+            else throw new Exception("Agency doesn't exist");
+            
+        }
+
         public async Task<AgencyDto> CreateAgencyAsync(AgencyDto agencyDto)
         {
             var agency = _mapper.Map<Domain.Entities.Agency>(agencyDto);
-            await _agencyRepository.CreateAsync(agency);
-            return _mapper.Map<AgencyDto>(agency);
+            var savedAgency = await _agencyRepository.CreateAsync(agency);
+            return _mapper.Map<AgencyDto>(savedAgency);
         }
         public async Task DeleteAgencyByIdAsync(int agencyDto)
         {
-            var agency = _agencyRepository.GetById(agencyDto);
-            var packages = agency.Packages;
-            foreach (var package in packages){
-                await _packageRepository.DeleteByIdAsync(package.Id);
-            } 
-            await _agencyRepository.DeleteByIdAsync(agencyDto);
+                        await _agencyRepository.DeleteByIdAsync(agencyDto);
         }
 
 

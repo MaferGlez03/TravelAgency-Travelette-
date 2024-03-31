@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace TravelAgency.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class FirstMigration : Migration
+    public partial class Excursions : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -130,6 +130,31 @@ namespace TravelAgency.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "Packages",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    Duration = table.Column<int>(type: "int", nullable: false),
+                    StartDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    EndDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    AgencyID = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Packages", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Packages_Agencies_AgencyID",
+                        column: x => x.AgencyID,
+                        principalTable: "Agencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -243,7 +268,8 @@ namespace TravelAgency.Infrastructure.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HotelId = table.Column<int>(type: "int", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Price = table.Column<double>(type: "float", nullable: false)
+                    Price = table.Column<double>(type: "float", nullable: false),
+                    Availability = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -252,6 +278,32 @@ namespace TravelAgency.Infrastructure.Migrations
                         name: "FK_LodgingOffers_Hotels_HotelId",
                         column: x => x.HotelId,
                         principalTable: "Hotels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PackagesFacilities",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PackageId = table.Column<int>(type: "int", nullable: false),
+                    FacilityId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PackagesFacilities", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PackagesFacilities_Facilities_FacilityId",
+                        column: x => x.FacilityId,
+                        principalTable: "Facilities",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PackagesFacilities_Packages_PackageId",
+                        column: x => x.PackageId,
+                        principalTable: "Packages",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -363,6 +415,21 @@ namespace TravelAgency.Infrastructure.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Packages_AgencyID",
+                table: "Packages",
+                column: "AgencyID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PackagesFacilities_FacilityId",
+                table: "PackagesFacilities",
+                column: "FacilityId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PackagesFacilities_PackageId",
+                table: "PackagesFacilities",
+                column: "PackageId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Tourists_Name",
                 table: "Tourists",
                 column: "Name",
@@ -394,13 +461,10 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "Excursions");
 
             migrationBuilder.DropTable(
-                name: "Facilities");
+                name: "PackagesFacilities");
 
             migrationBuilder.DropTable(
                 name: "Tourists");
-
-            migrationBuilder.DropTable(
-                name: "Agencies");
 
             migrationBuilder.DropTable(
                 name: "LodgingOffers");
@@ -412,7 +476,16 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "AspNetUsers");
 
             migrationBuilder.DropTable(
+                name: "Facilities");
+
+            migrationBuilder.DropTable(
+                name: "Packages");
+
+            migrationBuilder.DropTable(
                 name: "Hotels");
+
+            migrationBuilder.DropTable(
+                name: "Agencies");
         }
     }
 }

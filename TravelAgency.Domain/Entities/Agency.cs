@@ -15,6 +15,7 @@ namespace TravelAgency.Domain.Entities
         public string Address { get; set; } = null!;
         public string ElectronicAddress { get; set; } = null!;
         public IList<AgencyOffer> AgencyOffers { get; private set; } = new List<AgencyOffer>();
+        public IList<Package> Packages { get; private set;} = new List<Package>();
 
         #region Methods
 

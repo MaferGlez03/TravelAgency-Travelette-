@@ -12,8 +12,8 @@ using TravelAgency.Infrastructure;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    [Migration("20240330202537_FirstMigration")]
-    partial class FirstMigration
+    [Migration("20240331065847_Excursions")]
+    partial class Excursions
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -291,6 +291,9 @@ namespace TravelAgency.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
+                    b.Property<int>("Availability")
+                        .HasColumnType("int");
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -309,6 +312,66 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("LodgingOffers");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AgencyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgencyID");
+
+                    b.ToTable("Packages");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.PackageFacility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilityId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("PackagesFacilities");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
@@ -492,6 +555,36 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("Hotel");
                 });
 
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.Agency", "agency")
+                        .WithMany("Packages")
+                        .HasForeignKey("AgencyID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("agency");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.PackageFacility", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.Facility", "facility")
+                        .WithMany()
+                        .HasForeignKey("FacilityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.Package", "package")
+                        .WithMany("packageFacilities")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("facility");
+
+                    b.Navigation("package");
+                });
+
             modelBuilder.Entity("TravelAgency.Domain.Relations.AgencyOffer", b =>
                 {
                     b.HasOne("TravelAgency.Domain.Entities.Agency", "Agency")
@@ -514,6 +607,8 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Entities.Agency", b =>
                 {
                     b.Navigation("AgencyOffers");
+
+                    b.Navigation("Packages");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Hotel", b =>
@@ -524,6 +619,11 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Entities.LodgingOffer", b =>
                 {
                     b.Navigation("AgencyOffers");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.Navigation("packageFacilities");
                 });
 #pragma warning restore 612, 618
         }
