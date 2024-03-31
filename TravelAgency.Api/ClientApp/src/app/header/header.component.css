@@ -1,0 +1,107 @@
+.header-default {
+    width: 100%;
+    height: 60px;
+    padding: 21px 104px;
+    /*background: #fd9effa2;*/  /*color traslucido*/
+    background: #FEC1FF;      /*color no traslucido*/
+    justify-content: space-between;
+    display: flex;
+    position: fixed;
+    left: 0;
+    right: 0;
+    border-bottom: 0.2rem solid black;
+}
+
+.header-main {
+    display: flex;
+    align-items: center;
+}
+
+.offers-btns {
+    display: flex;
+    gap: 12px;
+}
+
+.package {
+    gap: 1px;
+    display: flex;
+}
+
+.package-icon {
+    width: 24px;
+    height: 24px;
+    position: relative;
+}
+
+.airplane {
+    width: 22.5px;
+    height: 19.5px;
+    left: 0.75px;
+    top: 2.25px;
+    position: absolute;
+}
+
+.hotel-text {
+    cursor: pointer;
+    color: #112211;
+    font-size: 16px;
+    font-weight: 600;
+    word-wrap: break-word;
+}
+
+.logo {
+    width: 10%;
+    position: absolute;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    left: 0;
+    right: 0;
+    bottom: -13px;
+}
+
+.logo-img {
+    cursor: pointer;
+    font-size: 50px;
+    font-weight: 800;
+}
+
+.header-btns {
+    align-items: center;
+    gap: 32px;
+    display: flex;
+}
+
+.login-btn {
+    color: #000000;
+    font-size: 18px;
+    font-weight: 600;
+    word-wrap: break-word;
+    text-decoration: none;
+}
+
+.signup-btn-container {
+    cursor: pointer;
+    height: 48px;
+    background: #112211;
+    border-radius: 8px;
+    display: inline-flex;
+}
+
+.signup-btn {
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+}
+
+.signup-text {
+    color: white;
+    font-size: 14px;
+    font-weight: 600;
+    word-wrap: break-word;
+    text-decoration: none;
+}

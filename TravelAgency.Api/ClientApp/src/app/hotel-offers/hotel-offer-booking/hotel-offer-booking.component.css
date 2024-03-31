@@ -1,0 +1,353 @@
+.main-frame {
+    width: 77rem;
+    margin-top: 5.5rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.img-box {
+    display: flex;
+    width: 77rem;
+    height: 34.375rem;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex-shrink: 0;
+    margin-bottom: 20px;
+}
+
+.img1 {
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 0.75rem 0rem 0rem 0.75rem;
+}
+
+.img-box2 {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.img-box3 {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.img-box4 {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.img2 {
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.img3 {
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 0rem 0.75rem 0rem 0rem;
+}
+
+.img4 {
+    flex: 1 0 0;
+    align-self: stretch;
+}
+
+.img5 {
+    flex: 1 0 0;
+    align-self: stretch;
+    border-radius: 0rem 0rem 0.75rem 0rem;
+}
+
+.title-frame {
+    display: flex;
+    width: 77rem;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+}
+
+.title-name {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: var(--Blackish-Green, #121);
+    font-size: 3rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.stars {
+    display: flex;
+    align-items: flex-start;
+}
+
+.title-details {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+}
+
+.location {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.125rem;
+}
+
+.location-text {
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.price_and_booking {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 1rem;
+}
+
+.price_number {
+    color: var(--Slamon, #ff8682);
+    text-align: right;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.night {
+    color: var(--Slamon, #ff8682);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.booking-btns {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.9375rem;
+}
+
+.booking-btn {
+    display: flex;
+    width: 9.375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    background: var(--Mint-Green, #fd9effe0);
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.info-frame {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4rem;
+}
+
+.line1 {
+    width: 77rem;
+    height: 0.0625rem;
+    background: var(--Blackish-Green, rgb(171, 163, 163));
+    border: rgb(255, 255, 255);
+}
+
+.overview_and_amenities {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.overview-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.overview-title {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.overview-text {
+    width: 77rem;
+    color: var(--Blackish-Green, #121);
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.amenities-box {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.amenitie {
+    display: flex;
+    width: 10rem;
+    height: 9.0625rem;
+    padding: 1rem 4rem 1rem 1rem;
+    align-items: flex-start;
+    gap: 0.625rem;
+    border-radius: 0.75rem;
+    border: 1px solid var(--Mint-Green, #fd9effe0);
+}
+
+.amenitie-interior {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-self: stretch;
+}
+
+.stardust {
+    width: 2rem;
+    height: 2rem;
+}
+
+.amenitie-text {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.availablerooms-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 2rem;
+}
+
+.availablerooms-title {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.availablerooms-table {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.availableroom {
+    display: flex;
+    width: 77rem;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.room-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.room-foto {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 0.25rem;
+}
+
+.room-text {
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.room-booking {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+}
+
+.room-price {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.room-night {
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.room-book-btn {
+    display: flex;
+    width: 9.375rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.625rem;
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    background: var(--Mint-Green, #fd9effe0);
+    color: var(--Blackish-Green, #121);
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.line2 {
+    width: 77rem;
+    height: 0.03125rem;
+    background: var(--Blackish-Green, rgb(171, 163, 163));
+    border: rgb(255, 255, 255);
+}
+
+hr {
+    opacity: 1;
+}

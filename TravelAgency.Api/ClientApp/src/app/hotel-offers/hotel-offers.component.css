@@ -1,0 +1,181 @@
+.main-frame {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin-top: 5.5rem;
+    align-items: center;
+}
+
+.category-bar {
+    margin-left: auto;
+    margin-right: auto;
+    align-items: center;
+    display: flex;
+    padding: 1rem 1.5rem;
+    gap: 1.5rem;
+    border-radius: 0.75rem;
+    background: var(--Neutrals, #fff);
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+}
+
+.hotel-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background-color: white;
+    border: none;
+}
+
+.line1 {
+    width: 0.0625rem;
+    height: 3rem;
+    background: #d7e2ee;
+}
+
+.motel-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.5rem;
+    flex: 1 0 0;
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background-color: white;
+    border: none;
+}
+
+.line2 {
+    width: 0.0625rem;
+    height: 3rem;
+    background: #d7e2ee;
+}
+
+.resort-btn {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 0.25rem;
+    flex: 1 0 0;
+    color: var(--Blackish-Green, #121);
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    background-color: white;
+    border: none;
+}
+
+.offers-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.rectangle1 {
+    display: flex;
+    align-items: end;
+    box-shadow: 0px 4px 16px 0px rgba(17, 34, 17, 0.05);
+}
+
+.rectangle1-img {
+    height: 240px;
+    width: 18.75rem;
+    border-radius: 0.75rem 0rem 0rem 0.75rem;
+}
+
+.rectangle1-main {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    padding: 1.5rem;
+    gap: 2.5rem;
+    border-radius: 0rem 0.75rem 0.75rem 0rem;
+    background: var(--Neutrals, #fff);
+}
+
+.rectangle1-content {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.rectangle1-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1 0 0;
+}
+
+.rectangle1-title {
+    color: var(--Blackish-Green, #121);
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.rectangle1-info {
+    display: flex;
+    width: 25rem;
+    height: 2rem;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.75rem;
+}
+
+.rectangle1-price-box {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.rectangle1-price-text {
+    color: var(--Slamon, #ff8682);
+    text-align: right;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.rectangle1-bottom {
+    height: 240px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 0rem 0.75rem 0.75rem 0rem;
+    background: var(--Neutrals, #fff);
+}
+
+.rectangle1-line {
+    height: 0.03125rem;
+    align-self: stretch;
+    background: var(--Blackish-Green, #121);
+}
+
+.rectangle1-btn {
+    margin-bottom: 0px;
+    display: flex;
+    height: 3rem;
+    padding: 0.5rem 1rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.25rem;
+    align-self: stretch;
+    border-radius: 0.25rem;
+    background: var(--Mint-Green, #fd9effe0);
+}

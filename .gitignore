@@ -396,3 +396,6 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# Ignorar el appsetings.json
+TravelAgency.Api/appsettings.json
