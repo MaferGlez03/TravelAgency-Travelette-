@@ -57,7 +57,8 @@ namespace TravelAgency.Application.ApplicationServices.Services
         public async Task DeletePackageByIdAsync(int packageId)
         {
             var package = _packageRepository.GetById(packageId);
-            var agency = package.agency;
+            var agencyID = package.AgencyID;
+            var agency = _agencyRepository.GetById(agencyID);
             agency.Packages.Remove(package);
             await _packageRepository!.DeleteByIdAsync(packageId);
         }
