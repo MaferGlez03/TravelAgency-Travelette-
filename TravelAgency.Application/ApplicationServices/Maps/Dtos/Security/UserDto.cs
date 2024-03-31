@@ -10,7 +10,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.Security
     
         public string UserName { get; set; }
         public string Email { get; set; }
-        public string Nacionality { get; set; }
+        public int Nacionality { get; set; }
        
     }
 }

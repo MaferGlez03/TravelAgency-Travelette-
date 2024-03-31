@@ -22,7 +22,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
         {
              
              CreateMap<User, UserDto>();
-             CreateMap<RegisterDto, User>();
+             CreateMap<RegisterDto, User>().ForMember(x=>x.Nationality,o=>o.MapFrom(c=>c.Nacionality));
              CreateMap<LoginDto, User>();
 
              CreateMap<FacilityDto, Domain.Entities.Facility>();

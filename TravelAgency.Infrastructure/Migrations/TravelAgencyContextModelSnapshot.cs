@@ -235,7 +235,10 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Excursions");
-                    b.ToTable("Excursions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("Excursion");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Facility", b =>
@@ -315,7 +318,66 @@ namespace TravelAgency.Infrastructure.Migrations
                         .IsUnique();
 
                     b.ToTable("LodgingOffers");
-                    b.ToTable("LodgingOffers");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AgencyID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Duration")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("EndDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<DateTime>("StartDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AgencyID");
+
+                    b.ToTable("Packages");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.PackageFacility", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("FacilityId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FacilityId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("PackagesFacilities");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
@@ -628,6 +690,11 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Entities.LodgingOffer", b =>
                 {
                     b.Navigation("AgencyOffers");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
+                {
+                    b.Navigation("packageFacilities");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Tourist", b =>
