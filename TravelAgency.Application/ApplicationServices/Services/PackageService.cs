@@ -25,7 +25,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
 
         public async Task<PackageDto> CreatePackageAsync(PackageDto packageDto)
-        {
+        { 
             //var package = _mapper.Map<Domain.Entities.Package>(packageDto);
 
             List<PackageFacility> _packageFacilities = new List<PackageFacility>();

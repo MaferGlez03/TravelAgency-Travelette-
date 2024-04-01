@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
@@ -36,17 +37,20 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
             CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
             CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
 
+            CreateMap<BookExcursionDto, Domain.Relations.BookExcursion>();
+            CreateMap<Domain.Relations.BookExcursion, BookExcursionDto>();
+
             CreateMap<HotelDto, Domain.Entities.Hotel>();
             CreateMap<Domain.Entities.Hotel, HotelDto>();
 
             CreateMap<HotelResponseDto, Domain.Entities.Hotel>();
             CreateMap<Domain.Entities.Hotel, HotelResponseDto>();
 
-             CreateMap<ExcursionDto, Domain.Entities.Excursion>();
-             CreateMap<Domain.Entities.Excursion, ExcursionDto>();
+            CreateMap<ExcursionDto, Domain.Entities.Excursion>();
+            CreateMap<Domain.Entities.Excursion, ExcursionDto>();
 
-             CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();
-             CreateMap<Domain.Entities.ExtendedExcursion, ExtendedExcursionDto>();
+            CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();
+            CreateMap<Domain.Entities.ExtendedExcursion, ExtendedExcursionDto>();
         
 
             CreateMap<LodgingOfferDto, Domain.Entities.LodgingOffer>()

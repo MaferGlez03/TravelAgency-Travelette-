@@ -33,6 +33,7 @@ namespace TravelAgency.Application
             services.AddScoped<IExtendedExcursionService, ExtendedExcursionService>();   
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();       
             services.AddScoped<IBookOfferService, BookOfferService>();
+            services.AddScoped<IBookExcursionService, BookExcursionService>();
             
 
             //JwtToken configuration.

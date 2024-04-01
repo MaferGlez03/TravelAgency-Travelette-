@@ -46,7 +46,6 @@ namespace TravelAgency.Application.ApplicationServices.Services
                 DeparturePlace = extendedExcursionDto.DeparturePlace,
                 Guia = extendedExcursionDto.Guia,
                 NumberOfDays = extendedExcursionDto.NumberOfDays,
-                ArrivalDate1 = extendedExcursionDto.ArrivalDate1,
             };
 
              ee.AddExtendedExcursions(_hotel_ExtendedExcursions);

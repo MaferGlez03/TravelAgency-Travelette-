@@ -14,7 +14,6 @@ namespace TravelAgency.Domain.Entities
     {
         public int NumberOfDays {get; set;} = 0;
         public IList<Hotel_ExtendedExcursion> Hotel_ExtendedExcursions {get; private set;} = new List<Hotel_ExtendedExcursion>();
-        public DateTime ArrivalDate1 {get; set;}
         public void AddExtendedExcursions(List<Hotel_ExtendedExcursion> _hotel_ExtendedExcursions)
         {
             foreach (Hotel_ExtendedExcursion extendedExcursion in _hotel_ExtendedExcursions)
