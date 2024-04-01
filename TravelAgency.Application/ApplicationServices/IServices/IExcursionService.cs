@@ -12,6 +12,6 @@ namespace TravelAgency.Application.ApplicationServices.IServices
         Task<ExcursionDto> CreateExcursionAsync(ExcursionDto excursionDto);
         Task<ExcursionDto> UpdateExcursionAsync(ExcursionDto excursionDto);
         Task<IEnumerable<ExcursionDto>> ListExcursionAsync();
-        Task DeleteExcursionAsync(int excursionDto);
+        Task DeleteExcursionByIdAsync(int excursionDto);
     }
 }
