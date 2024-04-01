@@ -8,7 +8,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer
 {
     public class LodgingOfferDtoResponse
     {
-        public int LodgingOfferId { get; set; } = 0;
+        public int Id { get; set; } = 0;
         public string Description { get; set; }
         public double Price { get; set; }
         public HotelDto hotelDto {get; set;}

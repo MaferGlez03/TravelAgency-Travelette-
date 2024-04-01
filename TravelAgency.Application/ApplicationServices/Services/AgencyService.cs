@@ -1,19 +1,16 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.AddOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
-using TravelAgency.Domain.Entities;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
+using TravelAgency.Application.Common.Mappings;
 
 namespace TravelAgency.Application.ApplicationServices.Services
 {
-    public class AgencyService : IAgencyService
+    public class AgencyService :IAgencyService
     {
 
         private readonly IAgencyOfferRepository _agencyOfferRepository;
@@ -26,6 +23,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             _mapper = mapper;
             _agencyOfferRepository = agencyOfferRepository;
         }
+
 
         public async Task AddOffers(AddOfferDto addOfferDto)
         {
@@ -70,7 +68,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _agencyRepository.UpdateAsync(agency);
         }
 
-        public async Task<IEnumerable<AgencyDto>> ListAgencyAsync()
+        public async Task<PaginatedList<AgencyDto>> ListAgencyAsync(int pageNumber,int pageSize)
         {
             var agencies = await _agencyRepository.ListAsync();
             var list = agencies.ToList();
@@ -79,8 +77,11 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 agenciesfinal.Add(_mapper.Map<AgencyDto>(list[i]));
             }
-            return agenciesfinal;
+            
+
+            return PaginatedList<AgencyDto>.CreatePaginatedListAsync(agenciesfinal,pageNumber,pageSize);
         }
+
 
         public async Task<AgencyDto> UpdateAgencyAsync(AgencyDto agencyDto)
         {

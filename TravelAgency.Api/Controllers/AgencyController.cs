@@ -38,9 +38,9 @@ namespace TravelAgency.Api.Controllers
         [HttpGet]
         [Route("list")]
         //[Authorize (Roles = "SuperAdmin")]
-        public async Task<ActionResult<IEnumerable<Agency>>> ListAgency()
+        public async Task<ActionResult<IEnumerable<Agency>>> ListAgency([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
-            var agencies = await _agencyService.ListAgencyAsync();
+            var agencies = await _agencyService.ListAgencyAsync(pageNumber,pageSize);
 
             return Ok(agencies);
 
@@ -50,9 +50,9 @@ namespace TravelAgency.Api.Controllers
         [Route("list/filters")]
          public async Task<ActionResult<IEnumerable<Agency>>> ListAgencyFilters([FromQuery]AgencyFilters? filters,
          [FromQuery] int pageSize = int.MaxValue,
-         [FromQuery] int currentPage = 1)
+         [FromQuery] int pageNumber = 1)
         {
-            var agencies = await _agencyService.ListAgencyAsync();
+            var agencies = await _agencyService.ListAgencyAsync(pageNumber,pageSize);
 
             return Ok(agencies);
 

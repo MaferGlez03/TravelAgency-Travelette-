@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using TravelAgency.Domain.Common;
 using TravelAgency.Infrastructure.Common.Interfaces;
 
+
 namespace TravelAgency.Infrastructure.Common.Utilities
 {
     public abstract class GenericRepository<TEntity> : IGenericRepository<TEntity> where TEntity : BaseEntity
@@ -34,7 +35,7 @@ namespace TravelAgency.Infrastructure.Common.Utilities
         {
             return await entity.FindAsync(elementId, cancellationToken);
         }
-        
+
 
         public async Task<TEntity> CreateAsync(TEntity element, CancellationToken cancellationToken = default)
         {
@@ -54,9 +55,10 @@ namespace TravelAgency.Infrastructure.Common.Utilities
             return entities;
 
         }
-         public TEntity GetById<TId>(TId elementId)
+       
+        public TEntity GetById<TId>(TId elementId)
         {
-            return  entity.Find(elementId)!;
+            return entity.Find(elementId)!;
         }
     }
 }
