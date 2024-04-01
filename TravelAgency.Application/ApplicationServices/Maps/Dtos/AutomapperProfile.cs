@@ -11,6 +11,7 @@ using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Identity;
 
@@ -20,41 +21,45 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
     {
         public AutomapperProfile()
         {
-             
-             CreateMap<User, UserDto>();
-             CreateMap<RegisterDto, User>().ForMember(x=>x.Nationality,o=>o.MapFrom(c=>c.Nacionality));
-             CreateMap<LoginDto, User>();
 
-             CreateMap<FacilityDto, Domain.Entities.Facility>();
-             CreateMap<Domain.Entities.Facility,FacilityDto>();
+            CreateMap<User, UserDto>();
+            CreateMap<RegisterDto, User>().ForMember(x => x.Nationality, o => o.MapFrom(c => c.Nacionality));
+            CreateMap<LoginDto, User>();
 
-             CreateMap<AgencyDto, Domain.Entities.Agency>();
-             CreateMap<Domain.Entities.Agency, AgencyDto>();
+            CreateMap<FacilityDto, Domain.Entities.Facility>();
+            CreateMap<Domain.Entities.Facility, FacilityDto>();
 
-             CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
-             CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
+            CreateMap<AgencyDto, Domain.Entities.Agency>();
+            CreateMap<Domain.Entities.Agency, AgencyDto>();
 
-             CreateMap<HotelDto, Domain.Entities.Hotel>();
-             CreateMap<Domain.Entities.Hotel, HotelDto>();
+            CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
+            CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
 
-             CreateMap<HotelResponseDto, Domain.Entities.Hotel>();
-             CreateMap<Domain.Entities.Hotel, HotelResponseDto>();
+            CreateMap<HotelDto, Domain.Entities.Hotel>();
+            CreateMap<Domain.Entities.Hotel, HotelDto>();
 
-             CreateMap<LodgingOfferDto, Domain.Entities.LodgingOffer>()
-             .ForMember(x=>x.Id,o=>o.MapFrom(c=>c.Id));
-             CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDto>();
+            CreateMap<HotelResponseDto, Domain.Entities.Hotel>();
+            CreateMap<Domain.Entities.Hotel, HotelResponseDto>();
 
-             CreateMap<ExcursionDto, Domain.Entities.Excursion>();
-             CreateMap<Domain.Entities.Excursion, ExcursionDto>();
-        
+            CreateMap<LodgingOfferDto, Domain.Entities.LodgingOffer>()
+            .ForMember(x => x.Id, o => o.MapFrom(c => c.Id));
+            CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDto>();
 
-             CreateMap<LodgingOfferDtoResponse, Domain.Entities.LodgingOffer>();
-             CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDtoResponse>()
-             .ForMember(x=>x.hotelDto, o=>o.MapFrom(c=>c.Hotel!));
+            CreateMap<ExcursionDto, Domain.Entities.Excursion>();
+            CreateMap<Domain.Entities.Excursion, ExcursionDto>();
 
 
-             CreateMap<PackageDto, Domain.Entities.Package>();
-             CreateMap<Domain.Entities.Package, PackageDto>();
+            CreateMap<LodgingOfferDtoResponse, Domain.Entities.LodgingOffer>();
+            CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDtoResponse>()
+            .ForMember(x => x.hotelDto, o => o.MapFrom(c => c.Hotel!));
+
+
+            CreateMap<PackageDto, Domain.Entities.Package>();
+            CreateMap<Domain.Entities.Package, PackageDto>();
+
+
+            CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();
+            CreateMap<Domain.Entities.ExtendedExcursion, ExtendedExcursionDto>();
 
 
         }
