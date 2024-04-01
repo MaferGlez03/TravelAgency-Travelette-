@@ -6,6 +6,7 @@ using AutoMapper;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
@@ -46,6 +47,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
              CreateMap<ExcursionDto, Domain.Entities.Excursion>();
              CreateMap<Domain.Entities.Excursion, ExcursionDto>();
+
+             CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();
+             CreateMap<Domain.Entities.ExtendedExcursion, ExtendedExcursionDto>();
         
 
              CreateMap<LodgingOfferDtoResponse, Domain.Entities.LodgingOffer>();

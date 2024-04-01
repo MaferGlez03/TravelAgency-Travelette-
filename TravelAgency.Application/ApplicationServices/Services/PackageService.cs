@@ -40,6 +40,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 Id = packageDto.Id,
                 Capacity = packageDto.Capacity,
+                Price = packageDto.Price,
                 Duration = packageDto.Duration,
                 StartDate = packageDto.StartDate,
                 EndDate = packageDto.EndDate,
