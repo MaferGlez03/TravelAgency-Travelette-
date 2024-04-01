@@ -17,7 +17,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
         private readonly ILodgingOfferRepository? _lodgingOfferRepository;
         private readonly IHotelRepository _hotelRepository;
         private readonly IMapper _mapper;
-
+ 
         public HotelService(ILodgingOfferRepository lodgingOfferRepository, IHotelRepository hotelRepository, IMapper mapper)
         {
             _lodgingOfferRepository =lodgingOfferRepository;

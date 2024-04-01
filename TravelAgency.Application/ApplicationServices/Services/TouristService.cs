@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
 using TravelAgency.Application.Interfaces;
 using TravelAgency.Domain.Entities;
@@ -16,17 +17,19 @@ namespace TravelAgency.Application.ApplicationServices.Services
 {
     public class TouristService : ITouristService
     {
-        private readonly IUser _user;
+        private readonly IUser _user; 
         private readonly IAgencyOfferRepository _agencyOfferRepository;
+        private readonly IExcursionRepository _excursionRepository;
         private readonly ITouristRepository _touristRepository;
         private readonly IMapper _mapper;
-
-        public TouristService(ITouristRepository touristRepository, IMapper mapper, IUser user, IAgencyOfferRepository agencyOfferRepository)
+ 
+        public TouristService(ITouristRepository touristRepository, IMapper mapper, IUser user, IAgencyOfferRepository agencyOfferRepository, IExcursionRepository excursionRepository)
         {
             _touristRepository = touristRepository;
             _mapper = mapper;
             _user = user;
             _agencyOfferRepository = agencyOfferRepository;
+            _excursionRepository = excursionRepository;
         }
         public async Task<Tourist> CreateTouristAsync(User touristUser)
         {
@@ -73,9 +76,18 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var days = (bookOfferDto.DepurateDate-bookOfferDto.ArrivalDate).Days;
             bookOffer.Price = days*agencyOffer.Price;
             tourist.AddReservation(bookOffer);
-            await _touristRepository.UpdateAsync(tourist);
-           
-           
+            await _touristRepository.UpdateAsync(tourist);          
+        }
+        public async Task BookExcursionAsync(BookExcursionDto bookExcursionDto)
+        {
+            var bookExcursion = _mapper.Map<BookExcursion>(bookExcursionDto);
+            var excursion = _excursionRepository.GetById(bookExcursion.ExcursionId);
+            var tourists = await _touristRepository.ListAsync();
+            var tourist =tourists.ToList<Tourist>().FirstOrDefault(x=>x.userId == _user.Id)!;
+            var days = (excursion.DepartureDate-excursion.ArrivalDate).Days;
+            bookExcursion.TotalPrice = days*excursion.Price;
+            tourist.AddReservation(bookExcursion);
+            await _touristRepository.UpdateAsync(tourist);          
         }
     }
 }

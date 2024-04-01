@@ -23,6 +23,8 @@ namespace TravelAgency.Infrastructure
         public DbSet<PackageFacility> PackagesFacilities { get; set; }
         public DbSet<Excursion> Excursions { get; set; }
         public DbSet<ExtendedExcursion> ExtendedExcursions { get; set; }
+        public DbSet<Hotel_ExtendedExcursion> Hotel_ExtendedExcursions { get; set; }
+        public DbSet<BookExcursion> BookExcursions {get; set;}        
         public DbSet<Hotel_ExtendedExcursion> HotelExtendedExcursions { get; set; }
 
         public DbSet<BookOffer> BookOffers { get; set; }

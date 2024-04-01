@@ -11,4 +11,4 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer
         public DateTime ArrivalDate { get; set; } = DateTime.MinValue;
         public DateTime DepurateDate { get; set; }=DateTime.MaxValue;
     }
-}
+} 

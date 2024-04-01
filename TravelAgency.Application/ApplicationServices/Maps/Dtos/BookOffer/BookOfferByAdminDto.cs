@@ -8,7 +8,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer
     public class BookOfferByAdminDto:BookOfferDto
     {
         public string UserName {get; set;} = null!;
-        public int Nacionality{get;set;}
+        public int Nacionality{get;set;} 
         
     }
 }

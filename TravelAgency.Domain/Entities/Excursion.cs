@@ -6,13 +6,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelAgency.Domain.Common;
+using TravelAgency.Domain.Relations;
 
 namespace TravelAgency.Domain.Entities
 {
     public class Excursion : BaseEntity
     {
         public string Name {get; set;} = null!; 
-        public int Capacity {get; set;} = 0; 
+         public int Capacity {get; set;} = 0; 
         public float Price {get; set;} = 0; 
         public string DeparturePlace {get; set;} = null!; 
         public string ArrivalPlace {get; set;} = null!; 
@@ -21,5 +22,6 @@ namespace TravelAgency.Domain.Entities
         public string Guia {get; set;} = null!; 
         public int AgencyID {get; set; }
         public Agency? agency { get; set; }
+        public IList<BookExcursion> BookExcursions {get; set;} = new List<BookExcursion>();
     }
 }
