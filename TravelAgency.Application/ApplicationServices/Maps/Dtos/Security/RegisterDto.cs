@@ -10,9 +10,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.Security
 {
     public class RegisterDto : UserDto
     {
-        public string Password { get; set; }
+        public string? Password { get; set; }
         
         [DefaultValue(Role.Tourist)]
-        public string role{get; set;} 
+        public string? role{get; set;} 
     }
 }

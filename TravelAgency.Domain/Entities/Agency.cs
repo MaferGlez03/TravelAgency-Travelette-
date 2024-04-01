@@ -16,6 +16,7 @@ namespace TravelAgency.Domain.Entities
         public string ElectronicAddress { get; set; } = null!;
         public IList<AgencyOffer> AgencyOffers { get; private set; } = new List<AgencyOffer>();
         public IList<Package> Packages { get; private set;} = new List<Package>();
+        public IList<Excursion> Excursions { get; private set;} = new List<Excursion>();
 
         #region Methods
 
@@ -26,7 +27,6 @@ namespace TravelAgency.Domain.Entities
                 offer.Agency = this;
                 AgencyOffers.Add(offer);
             }
-
         }
 
         public void AddOffers(IEnumerable<AgencyOffer> offers)
@@ -35,7 +35,6 @@ namespace TravelAgency.Domain.Entities
             {
                 AddOffer(offer);
             }
-
         }
         public void DeleteOffer(AgencyOffer offer)
         {

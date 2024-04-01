@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
+using TravelAgency.Infrastructure.DataAccess.IRepository;
 
 namespace TravelAgency.Api.Controllers
 {
@@ -14,10 +15,12 @@ namespace TravelAgency.Api.Controllers
     public class BookOfferController : ControllerBase
     {
         private readonly ITouristService _touristService;
+        private readonly IBookOfferService _bookOfferService;
 
-        public BookOfferController(ITouristService touristService)
+        public BookOfferController(ITouristService touristService, IBookOfferService bookOfferService)
         {
             _touristService = touristService;
+            _bookOfferService = bookOfferService;
         }
 
         [HttpPost]
@@ -27,6 +30,23 @@ namespace TravelAgency.Api.Controllers
         {
             await _touristService.BookOfferAsync(bookOfferDto);
             return Ok();
+        }
+
+        [HttpPost]
+        [Route("bookByAdmin")]
+        [Authorize]
+        public async Task<IActionResult> BookOfferByAdmin(BookOfferByAdminDto bookOfferDto)
+        {
+            await _bookOfferService.BookOfferByAdminAsync(bookOfferDto);
+            return Ok();
+        }
+        [HttpGet]
+        [Route("list")]
+        [Authorize]
+        public async Task<IActionResult> ListReserves()
+        {
+            var reserves = await _bookOfferService.ListReservesAsync();
+            return Ok(reserves);
         }
     }
 }
