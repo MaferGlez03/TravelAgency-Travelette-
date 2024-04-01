@@ -66,7 +66,7 @@ namespace TravelAgency.Api.Controllers
 
         public async Task<IActionResult> DeleteExcursion(int excursion)
         {
-             _excursionService.DeleteExcursionAsync(excursion);
+             _excursionService.DeleteExcursionByIdAsync(excursion);
            return Ok();
         }
         // public async Task<IActionResult> DeleteExcursion(ExcursionDto excursion)
