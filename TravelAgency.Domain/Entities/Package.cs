@@ -28,5 +28,5 @@ namespace TravelAgency.Domain.Entities
                 packageFacilities.Add(facility);
             }
         }
-    }
+    } 
 }
