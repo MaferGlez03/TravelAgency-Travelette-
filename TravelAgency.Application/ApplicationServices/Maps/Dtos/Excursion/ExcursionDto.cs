@@ -16,5 +16,6 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion
         public string ArrivalPlace {get; set;} = null!; 
         public string DeparturePlace {get; set;} = null!; 
         public string Guia {get; set;} = null!; 
+        public int AgencyID { get; set; }
     }
 }

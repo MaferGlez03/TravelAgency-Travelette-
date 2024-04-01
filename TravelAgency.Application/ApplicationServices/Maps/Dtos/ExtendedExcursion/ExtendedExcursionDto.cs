@@ -16,6 +16,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursi
         public string ArrivalPlace {get; set;} = null!; 
         public string DeparturePlace {get; set;} = null!; 
         public string Guia {get; set;} = null!; 
-        
+        public int NumberOfDays {get; set;} = 0;
+        public int AgencyID { get; set; }
+        public List<int> hotelDtos { get; set; }
+        public DateTime ArrivalDate1 {get; set;}        
     }
 }

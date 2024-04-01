@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
@@ -13,11 +14,13 @@ namespace TravelAgency.Application.ApplicationServices.Services
     public class ExcursionService : IExcursionService 
     {
         private readonly IExcursionRepository _excursionRepository;
+        private readonly IAgencyRepository _agencyRepository;
         private readonly IMapper _mapper;
 
-        public ExcursionService(IExcursionRepository excursionRepository,IMapper mapper)
+        public ExcursionService(IAgencyRepository agencyRepository, IExcursionRepository excursionRepository,IMapper mapper)
         {
             _excursionRepository = excursionRepository;
+            _agencyRepository = agencyRepository;
             _mapper = mapper;
         }
         public async Task<ExcursionDto> CreateExcursionAsync(ExcursionDto excursionDto)
@@ -26,9 +29,13 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _excursionRepository.CreateAsync(excursion);
             return _mapper.Map<ExcursionDto>(excursion);
         }
-        public async Task DeleteExcursionAsync(int excursionId)
+        public async Task DeleteExcursionByIdAsync(int excursionId)
         {
-            await _excursionRepository.DeleteByIdAsync(excursionId);
+            var excursion = _excursionRepository.GetById(excursionId);
+            var agencyID = excursion.AgencyID;
+            var agency = _agencyRepository.GetById(agencyID);
+            agency.Excursions.Remove(excursion);
+            await _excursionRepository!.DeleteByIdAsync(excursionId);
         }        
 
         public async Task<IEnumerable<ExcursionDto>> ListExcursionAsync()
@@ -45,6 +52,10 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
         public async Task<ExcursionDto> UpdateExcursionAsync(ExcursionDto excursionDto)
         {
+            if (excursionDto == null)
+            {
+                throw new ArgumentNullException(nameof(excursionDto));
+            }
             var excursion = _excursionRepository.GetById(excursionDto.Id);
             _mapper.Map(excursionDto, excursion);
             await _excursionRepository.UpdateAsync(excursion);

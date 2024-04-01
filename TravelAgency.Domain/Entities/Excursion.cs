@@ -19,5 +19,7 @@ namespace TravelAgency.Domain.Entities
         public DateTime DepartureDate {get; set;} = DateTime.MinValue; //1 de enero de 0001 a las 00:00:00 AM
         public DateTime ArrivalDate {get; set;} = DateTime.MinValue; //1 de enero de 0001 a las 00:00:00 AM
         public string Guia {get; set;} = null!; 
+        public int AgencyID {get; set; }
+        public Agency? agency { get; set; }
     }
 }

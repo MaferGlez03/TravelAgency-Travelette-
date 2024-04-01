@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TravelAgency.Infrastructure;
 
@@ -11,9 +12,11 @@ using TravelAgency.Infrastructure;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    partial class TravelAgencyContextModelSnapshot : ModelSnapshot
+    [Migration("20240401013514_Excursions")]
+    partial class Excursions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -472,38 +475,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.ToTable("BookOffers");
                 });
 
-            modelBuilder.Entity("TravelAgency.Domain.Relations.Hotel_ExtendedExcursion", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("ExtendedExcursionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ExtendedExcursion_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HotelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Hotel_Id")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ExtendedExcursionId");
-
-                    b.HasIndex("HotelId");
-
-                    b.ToTable("Hotel_ExtendedExcursions");
-                });
-
             modelBuilder.Entity("TravelAgency.Infrastructure.Identity.User", b =>
                 {
                     b.Property<string>("Id")
@@ -575,9 +546,6 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
                 {
                     b.HasBaseType("TravelAgency.Domain.Entities.Excursion");
-
-                    b.Property<DateTime>("ArrivalDate1")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("NumberOfDays")
                         .HasColumnType("int");
@@ -726,21 +694,6 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("Tourist");
                 });
 
-            modelBuilder.Entity("TravelAgency.Domain.Relations.Hotel_ExtendedExcursion", b =>
-                {
-                    b.HasOne("TravelAgency.Domain.Entities.ExtendedExcursion", "ExtendedExcursion")
-                        .WithMany("Hotel_ExtendedExcursions")
-                        .HasForeignKey("ExtendedExcursionId");
-
-                    b.HasOne("TravelAgency.Domain.Entities.Hotel", "Hotel")
-                        .WithMany("Hotel_ExtendedExcursions")
-                        .HasForeignKey("HotelId");
-
-                    b.Navigation("ExtendedExcursion");
-
-                    b.Navigation("Hotel");
-                });
-
             modelBuilder.Entity("TravelAgency.Domain.Entities.Agency", b =>
                 {
                     b.Navigation("AgencyOffers");
@@ -752,8 +705,6 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Hotel", b =>
                 {
-                    b.Navigation("Hotel_ExtendedExcursions");
-
                     b.Navigation("lodgingOffers");
                 });
 
@@ -775,11 +726,6 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Relations.AgencyOffer", b =>
                 {
                     b.Navigation("BookOffers");
-                });
-
-            modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
-                {
-                    b.Navigation("Hotel_ExtendedExcursions");
                 });
 #pragma warning restore 612, 618
         }
