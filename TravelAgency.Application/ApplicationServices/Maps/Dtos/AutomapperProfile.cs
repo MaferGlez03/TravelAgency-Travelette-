@@ -6,6 +6,7 @@ using AutoMapper;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
@@ -41,9 +42,17 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
             CreateMap<HotelResponseDto, Domain.Entities.Hotel>();
             CreateMap<Domain.Entities.Hotel, HotelResponseDto>();
 
+             CreateMap<ExcursionDto, Domain.Entities.Excursion>();
+             CreateMap<Domain.Entities.Excursion, ExcursionDto>();
+
+             CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();
+             CreateMap<Domain.Entities.ExtendedExcursion, ExtendedExcursionDto>();
+        
+
             CreateMap<LodgingOfferDto, Domain.Entities.LodgingOffer>()
             .ForMember(x => x.Id, o => o.MapFrom(c => c.Id));
             CreateMap<Domain.Entities.LodgingOffer, LodgingOfferDto>();
+
 
             CreateMap<ExcursionDto, Domain.Entities.Excursion>();
             CreateMap<Domain.Entities.Excursion, ExcursionDto>();
