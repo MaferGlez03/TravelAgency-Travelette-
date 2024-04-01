@@ -7,8 +7,9 @@ using TravelAgency.Infrastructure.Common.Interfaces;
 
 namespace TravelAgency.Infrastructure.DataAccess.IRepository
 {
-    public interface IPackageRepository:IGenericRepository<Package>
+    public interface IPackageRepository : IGenericRepository<Package>
     {
-          
+        Task<IEnumerable<Package>> GetPackageWithFacilities();
+
     }
 }

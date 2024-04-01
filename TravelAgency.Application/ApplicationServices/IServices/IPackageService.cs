@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
+using TravelAgency.Application.Common.PaginatedList;
 
 namespace TravelAgency.Application.ApplicationServices.IServices
 {
@@ -11,7 +12,7 @@ namespace TravelAgency.Application.ApplicationServices.IServices
     {
         Task<PackageDto> CreatePackageAsync(PackageDto packageDto);
         Task<PackageDto> UpdatePackageAsync(PackageDto packageDto);
-        Task<IEnumerable<PackageDto>> ListPackageAsync();
+        Task<PaginatedList<PackageResponseDto>> ListPackageAsync(int pageNumber,int pageSize);
         Task DeletePackageByIdAsync(int PackageId);
     }
 }

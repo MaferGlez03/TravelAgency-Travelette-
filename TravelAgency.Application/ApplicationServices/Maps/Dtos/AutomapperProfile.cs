@@ -29,12 +29,16 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
             CreateMap<FacilityDto, Domain.Entities.Facility>();
             CreateMap<Domain.Entities.Facility, FacilityDto>();
+            CreateMap<Domain.Entities.PackageFacility, FacilityDto>();
 
             CreateMap<AgencyDto, Domain.Entities.Agency>();
             CreateMap<Domain.Entities.Agency, AgencyDto>();
 
             CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
             CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
+
+            CreateMap<ExcursionExtResponseDto, Domain.Relations.PackageExtendedExcursion>();
+            CreateMap<Domain.Relations.PackageExtendedExcursion, ExcursionExtResponseDto>();
 
             CreateMap<HotelDto, Domain.Entities.Hotel>();
             CreateMap<Domain.Entities.Hotel, HotelDto>();
@@ -65,6 +69,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
             CreateMap<PackageDto, Domain.Entities.Package>();
             CreateMap<Domain.Entities.Package, PackageDto>();
+            CreateMap<Domain.Entities.Package, PackageResponseDto>();
 
 
             CreateMap<ExtendedExcursionDto, Domain.Entities.ExtendedExcursion>();

@@ -15,7 +15,7 @@ namespace TravelAgency.Api.Controllers
         //!Añadir Get y cambiar el dto de registrarse.
         [HttpGet]
         [Route("list")]
-        public IActionResult GetNationalities()
+        public IActionResult GetNationalities([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
             var nationalities = Enum.GetValues(typeof(Nationality))
             .Cast<Nationality>()

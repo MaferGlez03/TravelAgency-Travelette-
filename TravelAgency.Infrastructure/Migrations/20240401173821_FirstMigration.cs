@@ -68,28 +68,6 @@ namespace TravelAgency.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Excursions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Capacity = table.Column<int>(type: "int", nullable: false),
-                    Price = table.Column<float>(type: "real", nullable: false),
-                    DeparturePlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ArrivalPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Guia = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
-                    NumberOfDays = table.Column<int>(type: "int", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Excursions", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Facilities",
                 columns: table => new
                 {
@@ -130,6 +108,35 @@ namespace TravelAgency.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Tourists", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Excursions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    Price = table.Column<float>(type: "real", nullable: false),
+                    DeparturePlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ArrivalPlace = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DepartureDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Guia = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AgencyID = table.Column<int>(type: "int", nullable: false),
+                    Discriminator = table.Column<string>(type: "nvarchar(21)", maxLength: 21, nullable: false),
+                    NumberOfDays = table.Column<int>(type: "int", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Excursions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Excursions_Agencies_AgencyID",
+                        column: x => x.AgencyID,
+                        principalTable: "Agencies",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -286,6 +293,58 @@ namespace TravelAgency.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "HotelExtendedExcursions",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    HotelId = table.Column<int>(type: "int", nullable: false),
+                    ExtendedExcursionId = table.Column<int>(type: "int", nullable: false),
+                    ArrivalDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_HotelExtendedExcursions", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_HotelExtendedExcursions_Excursions_ExtendedExcursionId",
+                        column: x => x.ExtendedExcursionId,
+                        principalTable: "Excursions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_HotelExtendedExcursions_Hotels_HotelId",
+                        column: x => x.HotelId,
+                        principalTable: "Hotels",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "PackageExtendedExcursion",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PackageId = table.Column<int>(type: "int", nullable: false),
+                    ExtendedExcursionId = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_PackageExtendedExcursion", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_PackageExtendedExcursion_Excursions_ExtendedExcursionId",
+                        column: x => x.ExtendedExcursionId,
+                        principalTable: "Excursions",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_PackageExtendedExcursion_Packages_PackageId",
+                        column: x => x.PackageId,
+                        principalTable: "Packages",
+                        principalColumn: "Id");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PackagesFacilities",
                 columns: table => new
                 {
@@ -434,10 +493,25 @@ namespace TravelAgency.Infrastructure.Migrations
                 column: "TouristId");
 
             migrationBuilder.CreateIndex(
+                name: "IX_Excursions_AgencyID",
+                table: "Excursions",
+                column: "AgencyID");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Facilities_Name",
                 table: "Facilities",
                 column: "Name",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HotelExtendedExcursions_ExtendedExcursionId",
+                table: "HotelExtendedExcursions",
+                column: "ExtendedExcursionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_HotelExtendedExcursions_HotelId",
+                table: "HotelExtendedExcursions",
+                column: "HotelId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Hotels_Name",
@@ -455,6 +529,16 @@ namespace TravelAgency.Infrastructure.Migrations
                 table: "LodgingOffers",
                 columns: new[] { "Id", "HotelId" },
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PackageExtendedExcursion_ExtendedExcursionId",
+                table: "PackageExtendedExcursion",
+                column: "ExtendedExcursionId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PackageExtendedExcursion_PackageId",
+                table: "PackageExtendedExcursion",
+                column: "PackageId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Packages_AgencyID",
@@ -500,7 +584,10 @@ namespace TravelAgency.Infrastructure.Migrations
                 name: "BookOffers");
 
             migrationBuilder.DropTable(
-                name: "Excursions");
+                name: "HotelExtendedExcursions");
+
+            migrationBuilder.DropTable(
+                name: "PackageExtendedExcursion");
 
             migrationBuilder.DropTable(
                 name: "PackagesFacilities");
@@ -516,6 +603,9 @@ namespace TravelAgency.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "Tourists");
+
+            migrationBuilder.DropTable(
+                name: "Excursions");
 
             migrationBuilder.DropTable(
                 name: "Facilities");

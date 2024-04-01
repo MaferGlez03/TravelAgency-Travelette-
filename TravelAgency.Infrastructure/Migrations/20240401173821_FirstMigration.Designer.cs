@@ -12,8 +12,8 @@ using TravelAgency.Infrastructure;
 namespace TravelAgency.Infrastructure.Migrations
 {
     [DbContext(typeof(TravelAgencyContext))]
-    [Migration("20240401060324_ExtendedExcursions")]
-    partial class ExtendedExcursions
+    [Migration("20240401173821_FirstMigration")]
+    partial class FirstMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -486,16 +486,10 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Property<DateTime>("ArrivalDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("ExtendedExcursionId")
+                    b.Property<int>("ExtendedExcursionId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ExtendedExcursion_Id")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HotelId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("Hotel_Id")
+                    b.Property<int>("HotelId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -504,7 +498,30 @@ namespace TravelAgency.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("Hotel_ExtendedExcursions");
+                    b.ToTable("HotelExtendedExcursions");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Relations.PackageExtendedExcursion", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("ExtendedExcursionId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ExtendedExcursionId");
+
+                    b.HasIndex("PackageId");
+
+                    b.ToTable("PackageExtendedExcursion");
                 });
 
             modelBuilder.Entity("TravelAgency.Infrastructure.Identity.User", b =>
@@ -578,9 +595,6 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
                 {
                     b.HasBaseType("TravelAgency.Domain.Entities.Excursion");
-
-                    b.Property<DateTime>("ArrivalDate1")
-                        .HasColumnType("datetime2");
 
                     b.Property<int>("NumberOfDays")
                         .HasColumnType("int");
@@ -732,16 +746,39 @@ namespace TravelAgency.Infrastructure.Migrations
             modelBuilder.Entity("TravelAgency.Domain.Relations.Hotel_ExtendedExcursion", b =>
                 {
                     b.HasOne("TravelAgency.Domain.Entities.ExtendedExcursion", "ExtendedExcursion")
-                        .WithMany("Hotel_ExtendedExcursions")
-                        .HasForeignKey("ExtendedExcursionId");
+                        .WithMany("HotelExtendedExcursions")
+                        .HasForeignKey("ExtendedExcursionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("TravelAgency.Domain.Entities.Hotel", "Hotel")
                         .WithMany("Hotel_ExtendedExcursions")
-                        .HasForeignKey("HotelId");
+                        .HasForeignKey("HotelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("ExtendedExcursion");
 
                     b.Navigation("Hotel");
+                });
+
+            modelBuilder.Entity("TravelAgency.Domain.Relations.PackageExtendedExcursion", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.ExtendedExcursion", "Excursion")
+                        .WithMany("PackageExtendedExcursions")
+                        .HasForeignKey("ExtendedExcursionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.Package", "Package")
+                        .WithMany("PackageExtendedExcursions")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.NoAction)
+                        .IsRequired();
+
+                    b.Navigation("Excursion");
+
+                    b.Navigation("Package");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Agency", b =>
@@ -767,6 +804,8 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
                 {
+                    b.Navigation("PackageExtendedExcursions");
+
                     b.Navigation("packageFacilities");
                 });
 
@@ -782,7 +821,9 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.ExtendedExcursion", b =>
                 {
-                    b.Navigation("Hotel_ExtendedExcursions");
+                    b.Navigation("HotelExtendedExcursions");
+
+                    b.Navigation("PackageExtendedExcursions");
                 });
 #pragma warning restore 612, 618
         }

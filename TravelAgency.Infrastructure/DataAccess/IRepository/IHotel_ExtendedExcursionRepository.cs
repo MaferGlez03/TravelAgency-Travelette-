@@ -9,7 +9,7 @@ namespace TravelAgency.Infrastructure.DataAccess.IRepository
 {
     public interface IHotel_ExtendedExcursionRepository : IGenericRepository<Hotel_ExtendedExcursion>
     {
-        
+        Task<IEnumerable<Hotel_ExtendedExcursion>> GetHotel_ExtendedExcursions();
     }
     
 }

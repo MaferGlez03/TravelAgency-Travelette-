@@ -15,10 +15,6 @@ namespace TravelAgency.Infrastructure.DataAccess.Repository
         {
         }
 
-        public IEnumerable<LodgingOffer> GetLodgingOffers()
-        {
-           return _context.LodgingOffers.Include(x => x.Hotel);
-        }
 
         public async Task<IEnumerable<LodgingOffer>> GetLodgingWithOffers()
         {

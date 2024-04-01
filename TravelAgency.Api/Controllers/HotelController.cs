@@ -32,9 +32,9 @@ namespace TravelAgency.Api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<ActionResult<IEnumerable<Hotel>>> ListHotel()
+        public async Task<ActionResult<IEnumerable<Hotel>>> ListHotel([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
-            var agencies = await _hotelService.ListHotelAsync();
+            var agencies = await _hotelService.ListHotelAsync(pageNumber,pageSize);
 
             return Ok(agencies);
 

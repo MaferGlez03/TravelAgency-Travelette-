@@ -6,6 +6,7 @@ using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
@@ -35,8 +36,8 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
 
 
-        public async Task<IEnumerable<HotelResponseDto>> ListHotelAsync()
-        { //!MODIFY THE OUTPUT.
+        public async Task<PaginatedList<HotelResponseDto>> ListHotelAsync(int pageNumber,int pageSize)
+        { 
             var hotels = await _hotelRepository.ListAsync();
             var list = hotels.ToList();
             List<HotelResponseDto> hotelsfinal = new();
@@ -51,7 +52,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
                 }
                 
             }
-            return hotelsfinal;
+            return  PaginatedList<HotelResponseDto>.CreatePaginatedListAsync(hotelsfinal,pageNumber,pageSize);
         }
 
         public async Task<HotelDto> UpdateHotelAsync(HotelDto hotelDto)

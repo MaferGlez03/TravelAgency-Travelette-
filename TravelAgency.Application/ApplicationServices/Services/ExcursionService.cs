@@ -6,6 +6,7 @@ using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
@@ -38,7 +39,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _excursionRepository!.DeleteByIdAsync(excursionId);
         }        
 
-        public async Task<IEnumerable<ExcursionDto>> ListExcursionAsync()
+        public async Task<PaginatedList<ExcursionDto>> ListExcursionAsync(int pageNumber,int pageSize)
         {
             var excursions = await _excursionRepository.ListAsync();
             var list = excursions.ToList();
@@ -47,7 +48,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 excursionsfinal.Add(_mapper.Map<ExcursionDto>(list[i]));
             }
-            return excursionsfinal;
+             return  PaginatedList<ExcursionDto>.CreatePaginatedListAsync(excursionsfinal,pageNumber,pageSize);
         }
 
         public async Task<ExcursionDto> UpdateExcursionAsync(ExcursionDto excursionDto)

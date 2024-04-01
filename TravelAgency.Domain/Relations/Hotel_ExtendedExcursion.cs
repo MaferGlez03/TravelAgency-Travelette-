@@ -9,8 +9,8 @@ namespace TravelAgency.Domain.Relations;
 
 public class Hotel_ExtendedExcursion : BaseEntity
 {
-    public int Hotel_Id {get; set;}
-    public int ExtendedExcursion_Id {get; set;}
+    public int HotelId {get; set;}
+    public int ExtendedExcursionId {get; set;}
     public Hotel? Hotel {get; set;}
     public ExtendedExcursion? ExtendedExcursion {get; set;}
     public DateTime ArrivalDate {get; set;}

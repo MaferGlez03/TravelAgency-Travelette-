@@ -31,9 +31,9 @@ namespace TravelAgency.Api.Controllers
 
         [HttpGet]
         [Route("list")]
-        public async Task<ActionResult<IEnumerable<Package>>> ListPackage()
+        public async Task<ActionResult<IEnumerable<PackageResponseDto>>> ListPackage([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
-            var packages = await _packageService.ListPackageAsync();
+            var packages = await _packageService.ListPackageAsync(pageNumber,pageSize);
 
             return Ok(packages);
 

@@ -43,9 +43,9 @@ namespace TravelAgency.Api.Controllers
         [HttpGet]
         [Route("list")]
         [Authorize]
-        public async Task<IActionResult> ListReserves()
+        public async Task<IActionResult> ListReserves([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
-            var reserves = await _bookOfferService.ListReservesAsync();
+            var reserves = await _bookOfferService.ListReservesAsync(pageNumber,pageSize);
             return Ok(reserves);
         }
     }

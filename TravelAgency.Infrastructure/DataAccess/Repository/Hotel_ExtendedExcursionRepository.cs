@@ -15,15 +15,11 @@ namespace TravelAgency.Infrastructure.DataAccess.Repository
         {
         }
 
-        public IEnumerable<Hotel_ExtendedExcursion> GetHotel_ExtendedExcursions()
+        public async Task<IEnumerable<Hotel_ExtendedExcursion>> GetHotel_ExtendedExcursions()
         {
-           return _context.Hotel_ExtendedExcursions.Include(x => x.Hotel);
+           return await entity.Include(x => x.Hotel).ToListAsync();
         }
 
-        public async Task<IEnumerable<Hotel_ExtendedExcursion>> GetLodgingWithOffers()
-        {
-           return await _context.Hotel_ExtendedExcursions.Include(x => x.Hotel)
-                            .ToListAsync();
-        }
+        
     }
 }

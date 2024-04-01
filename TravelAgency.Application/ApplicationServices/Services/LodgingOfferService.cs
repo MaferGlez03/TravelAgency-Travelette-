@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.LodgingOffer;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
 namespace TravelAgency.Application.ApplicationServices.Services
@@ -37,10 +38,10 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _lodgingOfferRepository!.DeleteByIdAsync(lodgingOfferId);
         }
 
-        public async Task<IEnumerable<LodgingOfferDtoResponse>> ListLodgingOfferAsync()
+        public async Task<PaginatedList<LodgingOfferDtoResponse>> ListLodgingOfferAsync(int pageNumber,int pageSize)
         {
             //!PROBLEMS TO SHOW HOTEL PROPERTIES.
-            var lodgingOffers = _lodgingOfferRepository!.GetLodgingOffers();
+            var lodgingOffers = await _lodgingOfferRepository!.GetLodgingWithOffers();
             var list = lodgingOffers.ToList();
             List<LodgingOfferDtoResponse> lodgingOffersfinal = new();
             for (int i = 0; i < lodgingOffers.Count(); i++)
@@ -48,7 +49,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
                 lodgingOffersfinal.Add(_mapper.Map<LodgingOfferDtoResponse>(list[i]));
               
             }
-            return lodgingOffersfinal;
+            return  PaginatedList<LodgingOfferDtoResponse>.CreatePaginatedListAsync(lodgingOffersfinal,pageNumber,pageSize);
         }
 
         public async Task<LodgingOfferDto> UpdateLodgingOfferAsync(LodgingOfferDto lodgingOfferDto)

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.Identity.Client;
 using TravelAgency.Domain.Common;
+using TravelAgency.Domain.Relations;
 
 namespace TravelAgency.Domain.Entities
 {
@@ -20,13 +21,35 @@ namespace TravelAgency.Domain.Entities
         public int AgencyID {get; set; }
         public Agency? agency { get; set; }
         public IList<PackageFacility> packageFacilities { get; set; } = new List<PackageFacility>();
+        public IList<PackageExtendedExcursion> PackageExtendedExcursions{get; private set;}= new List<PackageExtendedExcursion>();
 
+
+
+        #region "Methods"
         public void AddFacilities(List<PackageFacility> _packageFacilities)
         {
             foreach (PackageFacility facility in _packageFacilities)
             {
+                if(!packageFacilities.Contains(facility))
                 packageFacilities.Add(facility);
             }
         }
+        public void AddExcursions(List<PackageExtendedExcursion> _PackageExtendedExcursions)
+        {
+            foreach (var extendedExcursion in _PackageExtendedExcursions)
+            {
+                if(!PackageExtendedExcursions.Contains(extendedExcursion))
+                PackageExtendedExcursions.Add(extendedExcursion);
+            }
+        }
+        public void RemoveExcursions(List<PackageExtendedExcursion> _PackageExtendedExcursions)
+        {
+            foreach (var extendedExcursion in _PackageExtendedExcursions)
+            {
+                if(PackageExtendedExcursions.Contains(extendedExcursion))
+                PackageExtendedExcursions.Remove(extendedExcursion);
+            }
+        }
+        #endregion
     }
 }

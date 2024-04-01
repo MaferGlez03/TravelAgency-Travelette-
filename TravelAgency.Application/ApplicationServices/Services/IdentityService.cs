@@ -7,6 +7,7 @@ using System.Security.Principal;
 using System.Threading.Tasks;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Application.Interfaces;
 using TravelAgency.Domain.Constant;
 using TravelAgency.Infrastructure.Identity;
@@ -72,10 +73,10 @@ namespace TravelAgency.Application.ApplicationServices.Services
             return (token, savedUser.Id.ToString());
         }
 
-        public  IEnumerable<User> ListUsersAsync()
+        public  PaginatedList<User> ListUsersAsync(int pageNumber,int pageSize)
         {
             var users =  _identityManager.ListUsersAsync();
-            return users;
+           return  PaginatedList<User>.CreatePaginatedListAsync(users,pageNumber,pageSize);
         }
     }
 }

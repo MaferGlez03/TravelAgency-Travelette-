@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
@@ -33,7 +34,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
         
 
-        public async Task<IEnumerable<FacilityDto>> ListFacilityAsync()
+        public async Task<PaginatedList<FacilityDto>> ListFacilityAsync(int pageNumber,int pageSize)
         {
             var facilities = await _facilityRepository.ListAsync();
             var list = facilities.ToList();
@@ -42,7 +43,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 facilitiesfinal.Add(_mapper.Map<FacilityDto>(list[i]));
             }
-            return facilitiesfinal;
+            return  PaginatedList<FacilityDto>.CreatePaginatedListAsync(facilitiesfinal,pageNumber,pageSize);
         }
 
         public async Task<FacilityDto> UpdateFacilityAsync(FacilityDto facilityDto)

@@ -5,23 +5,29 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Agency;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
+using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
 namespace TravelAgency.Application.ApplicationServices.Services
 {
     public class PackageService : IPackageService
     {
+        private readonly IExtendedExcursionRepository _extendedExcursionRepository;
         private readonly IPackageRepository _packageRepository;
         private readonly IAgencyRepository _agencyRepository;
         private readonly IMapper _mapper;
 
-        public PackageService(IAgencyRepository agencyRepository, IPackageRepository packageRepository, IMapper mapper)
+        public PackageService(IAgencyRepository agencyRepository, IPackageRepository packageRepository, IMapper mapper, IExtendedExcursionRepository extendedExcursionRepository)
         {
             _packageRepository = packageRepository;
             _agencyRepository = agencyRepository;
             _mapper = mapper;
+            _extendedExcursionRepository = extendedExcursionRepository;
         }
 
         public async Task<PackageDto> CreatePackageAsync(PackageDto packageDto)
@@ -29,11 +35,23 @@ namespace TravelAgency.Application.ApplicationServices.Services
             //var package = _mapper.Map<Domain.Entities.Package>(packageDto);
 
             List<PackageFacility> _packageFacilities = new List<PackageFacility>();
+            List<PackageExtendedExcursion> _packageExcursions = new List<PackageExtendedExcursion>();
 
-            foreach (int facility in packageDto.facilityDtos)
+            foreach (int facility in packageDto.FacilitiesId)
             {
-                PackageFacility packageFacility = new PackageFacility{ FacilityId = facility, PackageId = packageDto.Id};
+                PackageFacility packageFacility = new PackageFacility { FacilityId = facility, PackageId = packageDto.Id };
                 _packageFacilities.Add(packageFacility);
+            }
+            foreach (int excursionId in packageDto.ExcursionsId)
+            {
+                var excursion = await _extendedExcursionRepository.GetByIdAsync(excursionId);
+                if (excursion.ArrivalDate >= packageDto.StartDate && excursion.DepartureDate <= packageDto.EndDate)
+                {
+                    PackageExtendedExcursion packageExcursion = new PackageExtendedExcursion { PackageId = packageDto.Id, ExtendedExcursionId = excursionId };
+
+                    _packageExcursions.Add(packageExcursion);
+                }
+                else throw new Exception("Excursion dates are out of then bond of the package dates");
             }
 
             Package p = new Package
@@ -49,6 +67,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             };
 
             p.AddFacilities(_packageFacilities);
+            p.AddExcursions(_packageExcursions);
 
             var _package = await _packageRepository!.CreateAsync(p);
 
@@ -64,16 +83,24 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _packageRepository!.DeleteByIdAsync(packageId);
         }
 
-        public async Task<IEnumerable<PackageDto>> ListPackageAsync()
+        public async Task<PaginatedList<PackageResponseDto>> ListPackageAsync(int pageNumber,int pageSize)
         {
-            var packages = await _packageRepository!.ListAsync();
+            var packages = await _packageRepository!.GetPackageWithFacilities();
             var list = packages.ToList();
-            List<PackageDto> packagesfinal = new();
+            List<PackageResponseDto> packagesfinal = new();
             for (int i = 0; i < packages.Count(); i++)
             {
-                packagesfinal.Add(_mapper.Map<PackageDto>(list[i]));
+                packagesfinal.Add(_mapper.Map<PackageResponseDto>(list[i]));
+                foreach (var facility in list[i].packageFacilities)
+                {
+                    packagesfinal[i].Facilities.Add(_mapper.Map<FacilityDto>(facility));
+                }
+                foreach (var excursion in list[i].PackageExtendedExcursions)
+                {
+                    packagesfinal[i].Excursions.Add(_mapper.Map<ExcursionExtResponseDto>(excursion));
+                }
             }
-            return packagesfinal;
+           return  PaginatedList<PackageResponseDto>.CreatePaginatedListAsync(packagesfinal,pageNumber,pageSize);
         }
 
         public async Task<PackageDto> UpdatePackageAsync(PackageDto packageDto)

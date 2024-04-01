@@ -48,9 +48,9 @@ namespace TravelAgency.Api.Controllers
         }
         [HttpGet]
         [Route("list")]
-        public async Task<IActionResult> GetUsers()
+        public async Task<IActionResult> GetUsers([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
         {
-            var users =_identityService.ListUsersAsync();
+            var users =_identityService.ListUsersAsync(pageNumber,pageSize);
             return Ok(users);
         }
 

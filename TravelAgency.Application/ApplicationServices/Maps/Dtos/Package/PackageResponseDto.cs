@@ -2,11 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Facility;
 
 namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.Package
 {
-    public class PackageDto
+    public class PackageResponseDto
     {
         public int Id {get; set;} = 0;
         public string Description {get; set;}
@@ -16,7 +17,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.Package
         public DateTime StartDate { get; set; }
         public DateTime EndDate { get; set; }
         public int AgencyID { get; set; }
-        public IList<int> FacilitiesId { get; set; } = new List<int>();
-        public IList<int> ExcursionsId { get; set; } = new List<int>();
+        public IList<FacilityDto> Facilities { get; set; } = new List<FacilityDto>();
+        public IList<ExcursionExtResponseDto> Excursions { get; set; } = new List<ExcursionExtResponseDto>();
     }
 }

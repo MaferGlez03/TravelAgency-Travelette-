@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Infrastructure.Identity;
 
 namespace TravelAgency.Application.ApplicationServices.IServices
@@ -11,6 +12,6 @@ namespace TravelAgency.Application.ApplicationServices.IServices
     {
         Task<(string,string)> CreateUserAsync(RegisterDto userDto);
         Task<(bool, string)> CheckCredentialsAsync(LoginDto userDto);
-         IEnumerable<User> ListUsersAsync();
+        PaginatedList<User> ListUsersAsync(int pageNumber,int pageSize);
     }
 }

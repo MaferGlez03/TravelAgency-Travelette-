@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Application.Interfaces;
 using TravelAgency.Application.Validators.Entities;
 using TravelAgency.Domain.Relations;
@@ -51,10 +52,11 @@ namespace TravelAgency.Application.ApplicationServices.Services
             
         }
 
-        public async Task<IEnumerable<BookOffer>> ListReservesAsync()
+        public async Task<PaginatedList<BookOffer>> ListReservesAsync(int pageNumber,int pageSize)
         {
             var reserves = await _bookOfferRepository.ListAsync();
-            return reserves;
+           
+            return  PaginatedList<BookOffer>.CreatePaginatedListAsync(reserves,pageNumber,pageSize) ;
         }
     }
 }

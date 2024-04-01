@@ -5,51 +5,38 @@ using System.Threading.Tasks;
 using AutoMapper;
 using TravelAgency.Application.ApplicationServices.IServices;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
+using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 
 namespace TravelAgency.Application.ApplicationServices.Services
 {
-    public class ExtendedExcursionService : IExtendedExcursionService 
+    public class ExtendedExcursionService : IExtendedExcursionService
     {
         private readonly IExtendedExcursionRepository _extendedExcursionRepository;
         private readonly IAgencyRepository _agencyRepository;
         private readonly IMapper _mapper;
 
-        public ExtendedExcursionService(IAgencyRepository agencyRepository, IExtendedExcursionRepository extendedExcursionRepository,IMapper mapper)
-        { 
+        public ExtendedExcursionService(IAgencyRepository agencyRepository, IExtendedExcursionRepository extendedExcursionRepository, IMapper mapper)
+        {
             _extendedExcursionRepository = extendedExcursionRepository;
             _agencyRepository = agencyRepository;
             _mapper = mapper;
         }
         public async Task<ExtendedExcursionDto> CreateExtendedExcursionAsync(ExtendedExcursionDto extendedExcursionDto)
         {
+            var ee = _mapper.Map<ExtendedExcursion>(extendedExcursionDto);
             List<Hotel_ExtendedExcursion> _hotel_ExtendedExcursions = new List<Hotel_ExtendedExcursion>();
 
-             foreach (int hotel in extendedExcursionDto.hotelDtos)
+            foreach (int hotel in extendedExcursionDto.hotelDtos)
             {
-                Hotel_ExtendedExcursion hotel_ExtendedExcursion = new Hotel_ExtendedExcursion{ Hotel_Id = hotel, ExtendedExcursion_Id = extendedExcursionDto.Id, ArrivalDate = extendedExcursionDto.ArrivalDate1};
+                Hotel_ExtendedExcursion hotel_ExtendedExcursion = new Hotel_ExtendedExcursion { HotelId = hotel, ExtendedExcursionId = extendedExcursionDto.Id, ArrivalDate = extendedExcursionDto.ArrivalDate1 };
                 _hotel_ExtendedExcursions.Add(hotel_ExtendedExcursion);
             }
 
-            ExtendedExcursion ee = new ExtendedExcursion
-            {
-                Id = extendedExcursionDto.Id,
-                Name = extendedExcursionDto.Name,
-                Capacity = extendedExcursionDto.Capacity,
-                Price = extendedExcursionDto.Price,
-                ArrivalDate = extendedExcursionDto.ArrivalDate,
-                DepartureDate = extendedExcursionDto.DepartureDate,
-                AgencyID = extendedExcursionDto.AgencyID,
-                ArrivalPlace = extendedExcursionDto.ArrivalPlace,
-                DeparturePlace = extendedExcursionDto.DeparturePlace,
-                Guia = extendedExcursionDto.Guia,
-                NumberOfDays = extendedExcursionDto.NumberOfDays,
-                ArrivalDate1 = extendedExcursionDto.ArrivalDate1,
-            };
 
-             ee.AddExtendedExcursions(_hotel_ExtendedExcursions);
+            ee.AddExtendedExcursions(_hotel_ExtendedExcursions);
 
             var _extendedExcursion = await _extendedExcursionRepository!.CreateAsync(ee);
 
@@ -62,18 +49,18 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var agency = _agencyRepository.GetById(agencyID);
             agency.Excursions.Remove(extendedExcursion);
             await _extendedExcursionRepository!.DeleteByIdAsync(extendedExcursionId);
-        }        
+        }
 
-        public async Task<IEnumerable<ExtendedExcursionDto>> ListExtendedExcursionAsync()
+        public async Task<PaginatedList<ExtendedExcursionDto>> ListExtendedExcursionAsync(int pageNumber,int pageSize)
         {
             var extendedExcursions = await _extendedExcursionRepository.ListAsync();
             var list = extendedExcursions.ToList();
-            List <ExtendedExcursionDto> extendedExcursionsfinal = new();
+            List<ExtendedExcursionDto> extendedExcursionsfinal = new();
             for (int i = 0; i < extendedExcursions.Count(); i++)
             {
                 extendedExcursionsfinal.Add(_mapper.Map<ExtendedExcursionDto>(list[i]));
             }
-            return extendedExcursionsfinal;
+            return  PaginatedList<ExtendedExcursionDto>.CreatePaginatedListAsync(extendedExcursionsfinal,pageNumber,pageSize);
         }
 
         public async Task<ExtendedExcursionDto> UpdateExtendedExcursionAsync(ExtendedExcursionDto extendedExcursionDto)
