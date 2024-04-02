@@ -27,11 +27,12 @@ public class StatisticsService : IStatisticsService
     private readonly IPackageRepository _packageRepository;
     private readonly IExcursionRepository _excursionRepository;
     private readonly IBookPackageRepository _bookPackageRepository;
-    private readonly IBookExcursionRepository _bookExcursionRepository;
-    private readonly IBookOfferRepository _bookOfferRepository;
+    private readonly IExtendedExcursionRepository _extendedExcursionRepository;
+    private readonly IHotel_ExtendedExcursionRepository _hotel_ExtendedExcursionRepository;
     private readonly IMapper _mapper;
 
-    public StatisticsService(IPackageRepository packageRepository, IExcursionRepository excursionRepository, IBookPackageRepository bookPackageRepository,IHotelRepository hotelRepository, IBookExcursionRepository bookExcursionRepository, IBookOfferRepository bookOfferRepository, IMapper mapper)
+
+    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository, IExcursionRepository excursionRepository, IExtendedExcursionRepository extendedExcursionRepository, IHotel_ExtendedExcursionRepository hotel_ExtendedExcursionRepository, IBookPackageRepository bookPackageRepository)
     {
         _packageRepository = packageRepository;
         _excursionRepository = excursionRepository;
@@ -40,6 +41,9 @@ public class StatisticsService : IStatisticsService
         _bookOfferRepository = bookOfferRepository;
         _mapper = mapper;
         _hotelRepository = hotelRepository;
+        _extendedExcursionRepository = extendedExcursionRepository;
+        _hotel_ExtendedExcursionRepository = hotel_ExtendedExcursionRepository;
+        _bookPackageRepository = bookPackageRepository;
     }
 
     public async Task<PaginatedList<FrequentTouristDto>> FrequentTourists(int pageNumber, int pageSize)
@@ -133,10 +137,17 @@ public class StatisticsService : IStatisticsService
         {
             foreach (var hotelId in package.PackageExtendedExcursions)
             {
-                var hotel = await _hotelRepository.GetByIdAsync(hotelId);
-                var mappedhotel = _mapper.Map<HotelDto>(hotel);
-                if (!hotelpackage.Contains(mappedhotel))
-                    hotelpackage.Add(mappedhotel);
+                var excursion = await _extendedExcursionRepository.GetByIdAsync(hotelId.ExtendedExcursionId);
+                var hotelExcursion = await _hotel_ExtendedExcursionRepository.ListAsync();
+                var hotelExcursionFinal =hotelExcursion.ToList().Where(x => x.ExtendedExcursionId == excursion.Id);
+                foreach (var item in hotelExcursionFinal)
+                {
+
+                    var hotel = await _hotelRepository.GetByIdAsync(item.HotelId);
+                    var mappedhotel = _mapper.Map<HotelDto>(hotel);
+                    if (!hotelpackage.Contains(mappedhotel))
+                        hotelpackage.Add(mappedhotel);
+                }
             }
 
         }
