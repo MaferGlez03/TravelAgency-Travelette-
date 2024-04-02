@@ -10,7 +10,7 @@ namespace TravelAgency.Application.ApplicationServices.IServices
 {
     public interface IBookOfferService
     {
-        Task BookOfferByAdminAsync(BookOfferByAdminDto bookOfferDto);
+        Task BookOfferByAdminAsync(BookOfferByAdminDto bookPackageDto);
         Task<PaginatedList<BookOffer>> ListReservesAsync(int pageNumber,int pageSize);
     }
 }

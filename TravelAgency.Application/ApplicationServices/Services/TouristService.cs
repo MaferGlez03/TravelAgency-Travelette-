@@ -12,6 +12,7 @@ using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 using TravelAgency.Infrastructure.Identity;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookPackage;
 
 namespace TravelAgency.Application.ApplicationServices.Services
 {
@@ -20,16 +21,18 @@ namespace TravelAgency.Application.ApplicationServices.Services
         private readonly IUser _user; 
         private readonly IAgencyOfferRepository _agencyOfferRepository;
         private readonly IExcursionRepository _excursionRepository;
+        private readonly IPackageRepository _packageRepository;
         private readonly ITouristRepository _touristRepository;
         private readonly IMapper _mapper;
- 
-        public TouristService(ITouristRepository touristRepository, IMapper mapper, IUser user, IAgencyOfferRepository agencyOfferRepository, IExcursionRepository excursionRepository)
+
+        public TouristService(ITouristRepository touristRepository, IMapper mapper, IUser user, IAgencyOfferRepository agencyOfferRepository, IExcursionRepository excursionRepository, IPackageRepository packageRepository)
         {
             _touristRepository = touristRepository;
             _mapper = mapper;
             _user = user;
             _agencyOfferRepository = agencyOfferRepository;
             _excursionRepository = excursionRepository;
+            _packageRepository = packageRepository;
         }
         public async Task<Tourist> CreateTouristAsync(User touristUser)
         {
@@ -76,6 +79,16 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var days = (bookOfferDto.DepurateDate-bookOfferDto.ArrivalDate).Days;
             bookOffer.Price = days*agencyOffer.Price;
             tourist.AddReservation(bookOffer);
+            await _touristRepository.UpdateAsync(tourist);          
+        }
+        public async Task BookPackageAsync(BookPackageDto bookPackageDto)
+        {
+            var bookPackage = _mapper.Map<BookPackage>(bookPackageDto);
+            var Package = _packageRepository.GetById(bookPackage.PackageId);
+            var tourists = await _touristRepository.ListAsync();
+            var tourist =tourists.ToList<Tourist>().FirstOrDefault(x=>x.userId == _user.Id)!;
+            bookPackage.Price = 200*Package.Price;
+            tourist.AddReservation(bookPackage);
             await _touristRepository.UpdateAsync(tourist);          
         }
         public async Task BookExcursionAsync(BookExcursionDto bookExcursionDto)

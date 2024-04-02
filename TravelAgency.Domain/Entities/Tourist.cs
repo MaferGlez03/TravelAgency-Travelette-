@@ -15,6 +15,7 @@ namespace TravelAgency.Domain.Entities
         public string Nationality {get; set;} = null!;
         public IList<BookOffer> BookOffers {get;set;} = new List<BookOffer>();
         public IList<BookExcursion> BookExcursions {get; set;} = new List<BookExcursion>();
+         public IList<BookPackage> BookPackages{get; private set;}= new List<BookPackage>();
         // public void AddExcursions(List<BookExcursion> _bookExcursions)
         // {
         //     foreach (BookExcursion excursion in _bookExcursions)
@@ -48,6 +49,31 @@ namespace TravelAgency.Domain.Entities
         public void CleanOffers()
         {
             BookOffers.Clear();
+
+        }
+        public void AddReservation(BookPackage package)
+        {
+            
+            if (!BookPackages.Contains(package))
+            {
+                package.Tourist = this;
+                BookPackages.Add(package);
+            }
+
+        }
+
+        public void DeleteReservation(BookPackage package)
+        {
+
+            if (BookPackages.Contains(package))
+            {
+                BookPackages.Remove(package);
+            }
+
+        }
+        public void CleanPackages()
+        {
+            BookPackages.Clear();
 
         }
 

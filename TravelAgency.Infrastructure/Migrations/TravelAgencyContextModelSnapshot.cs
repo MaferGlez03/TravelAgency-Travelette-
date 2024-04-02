@@ -501,6 +501,39 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.ToTable("BookOffers");
                 });
 
+            modelBuilder.Entity("TravelAgency.Domain.Relations.BookPackage", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("AirlineCompany")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("NumberOfPeople")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PackageId")
+                        .HasColumnType("int");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("float");
+
+                    b.Property<int>("TouristId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PackageId");
+
+                    b.HasIndex("TouristId");
+
+                    b.ToTable("BookPackages");
+                });
+
             modelBuilder.Entity("TravelAgency.Domain.Relations.Hotel_ExtendedExcursion", b =>
                 {
                     b.Property<int>("Id")
@@ -524,7 +557,7 @@ namespace TravelAgency.Infrastructure.Migrations
 
                     b.HasIndex("HotelId");
 
-                    b.ToTable("HotelExtendedExcursions");
+                    b.ToTable("Hotel_ExtendedExcursion");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Relations.PackageExtendedExcursion", b =>
@@ -788,6 +821,25 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("Tourist");
                 });
 
+            modelBuilder.Entity("TravelAgency.Domain.Relations.BookPackage", b =>
+                {
+                    b.HasOne("TravelAgency.Domain.Entities.Package", "Package")
+                        .WithMany("BookPackages")
+                        .HasForeignKey("PackageId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("TravelAgency.Domain.Entities.Tourist", "Tourist")
+                        .WithMany("BookPackages")
+                        .HasForeignKey("TouristId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Package");
+
+                    b.Navigation("Tourist");
+                });
+
             modelBuilder.Entity("TravelAgency.Domain.Relations.Hotel_ExtendedExcursion", b =>
                 {
                     b.HasOne("TravelAgency.Domain.Entities.ExtendedExcursion", "ExtendedExcursion")
@@ -854,6 +906,8 @@ namespace TravelAgency.Infrastructure.Migrations
 
             modelBuilder.Entity("TravelAgency.Domain.Entities.Package", b =>
                 {
+                    b.Navigation("BookPackages");
+
                     b.Navigation("PackageExtendedExcursions");
 
                     b.Navigation("packageFacilities");
@@ -864,6 +918,8 @@ namespace TravelAgency.Infrastructure.Migrations
                     b.Navigation("BookExcursions");
 
                     b.Navigation("BookOffers");
+
+                    b.Navigation("BookPackages");
                 });
 
             modelBuilder.Entity("TravelAgency.Domain.Relations.AgencyOffer", b =>

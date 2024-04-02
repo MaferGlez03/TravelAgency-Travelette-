@@ -22,6 +22,7 @@ namespace TravelAgency.Domain.Entities
         public Agency? agency { get; set; }
         public IList<PackageFacility> packageFacilities { get; set; } = new List<PackageFacility>();
         public IList<PackageExtendedExcursion> PackageExtendedExcursions{get; private set;}= new List<PackageExtendedExcursion>();
+        public IList<BookPackage> BookPackages{get; private set;}= new List<BookPackage>();
 
 
 
