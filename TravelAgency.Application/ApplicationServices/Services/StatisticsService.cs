@@ -16,6 +16,8 @@ using TravelAgency.Application.ApplicationServices.Maps.Dtos.WeekendExcursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.FrequentTourist;
 using TravelAgency.Application.Interfaces;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookAgency;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace TravelAgency.Application.ApplicationServices.Services;
 
@@ -25,13 +27,17 @@ public class StatisticsService : IStatisticsService
     private readonly IPackageRepository _packageRepository;
     private readonly IExcursionRepository _excursionRepository;
     private readonly IBookPackageRepository _bookPackageRepository;
+    private readonly IBookExcursionRepository _bookExcursionRepository;
+    private readonly IBookOfferRepository _bookOfferRepository;
     private readonly IMapper _mapper;
 
-    public StatisticsService(IPackageRepository packageRepository, IExcursionRepository excursionRepository, IBookPackageRepository bookPackageRepository,IHotelRepository hotelRepository, IMapper mapper)
+    public StatisticsService(IPackageRepository packageRepository, IExcursionRepository excursionRepository, IBookPackageRepository bookPackageRepository,IHotelRepository hotelRepository, IBookExcursionRepository bookExcursionRepository, IBookOfferRepository bookOfferRepository, IMapper mapper)
     {
         _packageRepository = packageRepository;
         _excursionRepository = excursionRepository;
         _bookPackageRepository = bookPackageRepository;
+        _bookExcursionRepository = bookExcursionRepository;
+        _bookOfferRepository = bookOfferRepository;
         _mapper = mapper;
         _hotelRepository = hotelRepository;
     }
@@ -137,4 +143,84 @@ public class StatisticsService : IStatisticsService
         return PaginatedList<HotelDto>.CreatePaginatedListAsync(hotelpackage.OrderBy(x => x.Name), pageNumber, pageSize);
     }
 
+    public async Task<PaginatedList<BookAgencyDto>> TotalBooksAgency(int pageNumber, int pageSize)
+    {
+        var packages = await _bookPackageRepository!.ListAsync();
+        var excursions = await _bookExcursionRepository!.ListAsync();
+        var offers = await _bookOfferRepository!.ListAsync();
+        Dictionary<int, Tuple<int, double, string>> values = new Dictionary<int, Tuple<int, double, string>>();
+        List<int> agenciesIds = new List<int>();
+
+        foreach (BookPackage bookPackage in packages)
+        {
+            int id = bookPackage.Package.AgencyID;
+            if(agenciesIds.Contains(id))
+            {
+                var acttuple = values[id];
+                int t1 = acttuple.Item1 +1;
+                double t2 = acttuple.Item2 + bookPackage.Price;
+
+                var newtuple = new Tuple<int, double, string>( t1, t2, acttuple.Item3);
+                values[id] = newtuple;
+            }
+            else 
+            {
+                agenciesIds.Add(id);
+                values.Add(id,new Tuple<int, double, string>(1,bookPackage.Price, bookPackage.Package.agency.Name));
+            }
+        }
+
+        foreach (BookExcursion bookExcursion in excursions)
+        {
+            int id = bookExcursion.Excursion.AgencyID;
+            if(agenciesIds.Contains(id))
+            {
+                var acttuple = values[id];
+                int t1 = acttuple.Item1 +1;
+                double t2 = acttuple.Item2 + bookExcursion.TotalPrice;
+
+                var newtuple = new Tuple<int, double, string>( t1, t2, acttuple.Item3);
+                values[id] = newtuple;
+            }
+            else
+            {
+                agenciesIds.Add(id);
+                values.Add(id,new Tuple<int, double, string>(1,bookExcursion.TotalPrice, bookExcursion.Excursion.agency.Name));
+            }
+        }
+
+        foreach (BookOffer bookOffer in offers)
+        {
+            int id = bookOffer.AgencyOffer.AgencyId;
+            if(agenciesIds.Contains(id))
+            {
+                var acttuple = values[id];
+                int t1 = acttuple.Item1 +1;
+                double t2 = acttuple.Item2 + bookOffer.Price;
+
+                var newtuple = new Tuple<int, double, string>( t1, t2, acttuple.Item3);
+                values[id] = newtuple;
+            }
+            else
+            {
+                agenciesIds.Add(id);
+                values.Add(id,new Tuple<int, double, string>(1,bookOffer.Price, bookOffer.AgencyOffer.Agency.Name));
+            }
+        }
+
+        List<BookAgencyDto> bookAgencies = new List<BookAgencyDto>();
+        foreach (var item in values)
+        {
+            BookAgencyDto bookAgencyDto = new BookAgencyDto
+            {
+                AgencyId = item.Key,
+                AgencyName = item.Value.Item3,
+                TotalBooks = item.Value.Item1,
+                ExpectedAmount = item.Value.Item2
+            };
+            bookAgencies.Add(bookAgencyDto);
+        }
+
+        return PaginatedList<BookAgencyDto>.CreatePaginatedListAsync(bookAgencies, pageNumber, pageSize);
+    }
 }
