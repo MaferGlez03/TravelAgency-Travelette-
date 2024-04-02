@@ -29,6 +29,7 @@ namespace TravelAgency.Infrastructure
             services.AddScoped<IBookOfferRepository, BookOfferRepository>();
             services.AddScoped<IHotel_ExtendedExcursionRepository, Hotel_ExtendedExcursionRepository>();
             services.AddScoped<IBookExcursionRepository, BookExcursionRepository>();
+            services.AddScoped<IBookPackageRepository, BookPackageRepository>();
             services.AddScoped<TravelAgencyContextInitializer>();
 
             services.AddAuthentication();

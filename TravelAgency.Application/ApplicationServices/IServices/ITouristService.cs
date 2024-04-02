@@ -7,6 +7,7 @@ using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookOffer;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookExcursion;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Identity;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookPackage;
 
 namespace TravelAgency.Application.ApplicationServices.IServices
 {
@@ -17,6 +18,7 @@ namespace TravelAgency.Application.ApplicationServices.IServices
         Task<IEnumerable<Tourist>> ListTouristAsync();
         Task DeleteTouristByIdAsync(int touristDto);
         Task BookOfferAsync(BookOfferDto bookOfferDto);
+        Task BookPackageAsync(BookPackageDto bookPackageDto);
         Task BookExcursionAsync(BookExcursionDto bookExcursionDto);
     }
 }

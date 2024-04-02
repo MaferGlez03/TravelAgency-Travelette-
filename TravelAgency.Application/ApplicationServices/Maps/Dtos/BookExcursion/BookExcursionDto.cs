@@ -8,6 +8,5 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.BookExcursion;
 public class BookExcursionDto 
 {
     public int ExcursionId {get; set;}
-    public float TotalPrice {get; set;}
     public int NumberOfCompanions {get; set;} 
 }

@@ -16,6 +16,7 @@ using TravelAgency.Application.ApplicationServices.Maps.Dtos.Security;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.ExtendedExcursion;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Infrastructure.Identity;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookPackage;
 
 namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 {
@@ -37,6 +38,9 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
 
             CreateMap<BookOfferDto, Domain.Relations.BookOffer>();
             CreateMap<Domain.Relations.BookOffer, BookOfferDto>();
+
+            CreateMap<BookPackageDto, Domain.Relations.BookPackage>();
+            CreateMap<Domain.Relations.BookPackage, BookPackageDto>();
 
             CreateMap<BookExcursionDto, Domain.Relations.BookExcursion>();
             CreateMap<Domain.Relations.BookExcursion, BookExcursionDto>();

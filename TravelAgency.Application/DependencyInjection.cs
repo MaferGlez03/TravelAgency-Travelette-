@@ -35,6 +35,8 @@ namespace TravelAgency.Application
             services.AddScoped<IBookOfferService, BookOfferService>();
             services.AddScoped<IBookExcursionService, BookExcursionService>();
             services.AddScoped<IStatisticsService, StatisticsService>();
+            services.AddScoped<IBookPackageService, BookPackageService>();
+
             
 
             //JwtToken configuration.
