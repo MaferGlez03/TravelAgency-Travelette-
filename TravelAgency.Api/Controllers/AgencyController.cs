@@ -52,7 +52,7 @@ namespace TravelAgency.Api.Controllers
          [FromQuery] int pageSize = int.MaxValue,
          [FromQuery] int pageNumber = 1)
         {
-            var agencies = await _agencyService.ListAgencyAsync(pageNumber,pageSize);
+            var agencies = await _agencyService.FindAllAgenciesAsync(filters,pageNumber,pageSize);
 
             return Ok(agencies);
 

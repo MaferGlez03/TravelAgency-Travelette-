@@ -32,13 +32,13 @@ namespace TravelAgency.Infrastructure.DataAccess.Repository
                  if(filters.HotelId > 0)
                 query = query.Where(a => a.AgencyOffers.Any(o => o.LodgingOffer!.HotelId == filters.HotelId));
                
-                // if(filters.IncludeOffers)
-                // query.Include(a => a.AgencyOffers).ThenInclude(x =>x.LodgingOffer)
+                if(filters.IncludeOffers)
+                query.Include(a => a.AgencyOffers).ThenInclude(x =>x.LodgingOffer);
                 // .ThenInclude(l => l.Hotel);
                
             }
 
-           return query.ToList();
+           return await query.ToListAsync();
         }
        
     }

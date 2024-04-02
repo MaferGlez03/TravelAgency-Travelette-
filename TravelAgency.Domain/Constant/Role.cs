@@ -9,6 +9,8 @@ namespace TravelAgency.Domain.Constant
     {
         public const string SuperAdmin = "SuperAdmin";
         public const string Admin = "Admin";
+        public const string Staff = "Staff";
+        public const string Marketing = "Marketing";
         public const string Tourist = "Tourist";
         
     }
