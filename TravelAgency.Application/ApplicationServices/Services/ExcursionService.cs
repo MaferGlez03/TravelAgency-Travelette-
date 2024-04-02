@@ -32,10 +32,6 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
         public async Task DeleteExcursionByIdAsync(int excursionId)
         {
-            var excursion = _excursionRepository.GetById(excursionId);
-            var agencyID = excursion.AgencyID;
-            var agency = _agencyRepository.GetById(agencyID);
-            agency.Excursions.Remove(excursion);
             await _excursionRepository!.DeleteByIdAsync(excursionId);
         }        
 

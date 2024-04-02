@@ -29,10 +29,9 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var ee = _mapper.Map<ExtendedExcursion>(extendedExcursionDto);
             List<Hotel_ExtendedExcursion> _hotel_ExtendedExcursions = new List<Hotel_ExtendedExcursion>();
 
-
-            foreach (int hotel in extendedExcursionDto.hotelDtos)
+            foreach (var hotel in extendedExcursionDto.hotelDtos)
             {
-                Hotel_ExtendedExcursion hotel_ExtendedExcursion = new Hotel_ExtendedExcursion { HotelId = hotel, ExtendedExcursionId = extendedExcursionDto.Id, ArrivalDate = extendedExcursionDto.ArrivalDate1 };
+                Hotel_ExtendedExcursion hotel_ExtendedExcursion = new Hotel_ExtendedExcursion { HotelId = hotel.HotelId, ExtendedExcursionId = extendedExcursionDto.Id, ArrivalDate = hotel.ArrivalHotelDay };
                 _hotel_ExtendedExcursions.Add(hotel_ExtendedExcursion);
             }
 
@@ -45,10 +44,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
         public async Task DeleteExtendedExcursionAsync(int extendedExcursionId)
         {
-            var extendedExcursion = _extendedExcursionRepository.GetById(extendedExcursionId);
-            var agencyID = extendedExcursion.AgencyID;
-            var agency = _agencyRepository.GetById(agencyID);
-            agency.Excursions.Remove(extendedExcursion);
+            
             await _extendedExcursionRepository!.DeleteByIdAsync(extendedExcursionId);
         }
 
