@@ -71,6 +71,9 @@ namespace TravelAgency.Infrastructure
             //Default Role
             var superadminRole = new IdentityRole(Role.SuperAdmin);
             var touristRole = new IdentityRole(Role.Tourist);
+            var adminRole = new IdentityRole(Role.Admin);
+            var staffRole = new IdentityRole(Role.Staff);
+            var marketingRole = new IdentityRole(Role.Marketing);
 
             if (_roleManager.Roles.All(r => r.Name != superadminRole.Name))
             {
@@ -79,6 +82,18 @@ namespace TravelAgency.Infrastructure
             if (_roleManager.Roles.All(r => r.Name != touristRole.Name))
             {
                 await _roleManager.CreateAsync(touristRole);
+            }
+            if (_roleManager.Roles.All(r => r.Name != adminRole.Name))
+            {
+                await _roleManager.CreateAsync(adminRole);
+            }
+            if (_roleManager.Roles.All(r => r.Name != staffRole.Name))
+            {
+                await _roleManager.CreateAsync(staffRole);
+            }
+            if (_roleManager.Roles.All(r => r.Name != marketingRole.Name))
+            {
+                await _roleManager.CreateAsync(marketingRole);
             }
 
             //Default User

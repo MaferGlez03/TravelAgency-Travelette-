@@ -7,15 +7,17 @@ using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
 using TravelAgency.Application.Common.Mappings;
+using TravelAgency.Domain.Entities;
+using TravelAgency.Infrastructure.DataAccess.Filters;
 
 namespace TravelAgency.Application.ApplicationServices.Services
 {
-    public class AgencyService :IAgencyService
+    public class AgencyService : IAgencyService
     {
 
         private readonly IAgencyOfferRepository _agencyOfferRepository;
         private readonly IAgencyRepository _agencyRepository;
-                private readonly IMapper _mapper;
+        private readonly IMapper _mapper;
 
         public AgencyService(IAgencyRepository agencyRepository, IMapper mapper, IAgencyOfferRepository agencyOfferRepository)
         {
@@ -38,7 +40,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
                         LodgingOfferId = offer.OfferId,
                         Price = offer.Price
                     });
-                    
+
                 }
                 agency.AddOffers(newoffers);
 
@@ -46,7 +48,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
             }
             else throw new Exception("Agency doesn't exist");
-            
+
         }
 
         public async Task<AgencyDto> CreateAgencyAsync(AgencyDto agencyDto)
@@ -57,7 +59,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
         }
         public async Task DeleteAgencyByIdAsync(int agencyDto)
         {
-                        await _agencyRepository.DeleteByIdAsync(agencyDto);
+            await _agencyRepository.DeleteByIdAsync(agencyDto);
         }
 
         public async Task DeleteOffers(int agencyOfferId)
@@ -68,25 +70,31 @@ namespace TravelAgency.Application.ApplicationServices.Services
             await _agencyRepository.UpdateAsync(agency);
         }
 
-        public async Task<PaginatedList<AgencyDto>> ListAgencyAsync(int pageNumber,int pageSize)
+        public async Task<PaginatedList<Agency>> FindAllAgenciesAsync(AgencyFilters? filters, int pageNumber, int pageSize)
+        {
+            var agencies = await _agencyRepository.FindAllAgenciesAsync(filters);
+            return PaginatedList<Agency>.CreatePaginatedListAsync(agencies, pageNumber, pageSize);
+        }
+
+        public async Task<PaginatedList<AgencyDto>> ListAgencyAsync(int pageNumber, int pageSize)
         {
             var agencies = await _agencyRepository.ListAsync();
             var list = agencies.ToList();
-            List <AgencyDto> agenciesfinal = new();
+            List<AgencyDto> agenciesfinal = new();
             for (int i = 0; i < agencies.Count(); i++)
             {
                 agenciesfinal.Add(_mapper.Map<AgencyDto>(list[i]));
             }
-            
 
-            return PaginatedList<AgencyDto>.CreatePaginatedListAsync(agenciesfinal,pageNumber,pageSize);
+
+            return PaginatedList<AgencyDto>.CreatePaginatedListAsync(agenciesfinal, pageNumber, pageSize);
         }
 
 
         public async Task<AgencyDto> UpdateAgencyAsync(AgencyDto agencyDto)
         {
             var agency = _agencyRepository.GetById(agencyDto.Id);
-            _mapper.Map(agencyDto,agency);
+            _mapper.Map(agencyDto, agency);
             await _agencyRepository.UpdateAsync(agency);
             return _mapper.Map<AgencyDto>(agency);
         }

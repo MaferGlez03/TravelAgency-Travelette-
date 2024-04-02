@@ -11,18 +11,21 @@ using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
 
 namespace TravelAgency.Application.ApplicationServices.Services;
 
 public class StatisticsService : IStatisticsService
 {
+    private readonly IHotelRepository _hotelRepository;
     private readonly IPackageRepository _packageRepository;
     private readonly IMapper _mapper;
 
-    public StatisticsService(IPackageRepository packageRepository, IMapper mapper)
+    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository)
     {
         _packageRepository = packageRepository;
         _mapper = mapper;
+        _hotelRepository = hotelRepository;
     }
 
     public async Task<PaginatedList<PackageResponseDto>> SpensivesPackageAsync(int pageNumber, int pageSize)
@@ -54,4 +57,22 @@ public class StatisticsService : IStatisticsService
         }
        return  PaginatedList<PackageResponseDto>.CreatePaginatedListAsync(packagesfinal,pageNumber,pageSize);
     }
+    public async Task<PaginatedList<HotelDto>> HotelPackages(int pageNumber, int pageSize)
+    {
+        var packages =await  _packageRepository.GetPackageWithFacilities();
+        List<HotelDto> hotelpackage = new List<HotelDto>();
+        foreach (var package in packages)
+        {
+            foreach (var hotelId in package.PackageExtendedExcursions)
+            {
+                var hotel = await _hotelRepository.GetByIdAsync(hotelId);
+                var mappedhotel=_mapper.Map<HotelDto>(hotel);
+                if(!hotelpackage.Contains(mappedhotel))
+                 hotelpackage.Add(mappedhotel);
+            }
+            
+        }
+        return PaginatedList<HotelDto>.CreatePaginatedListAsync(hotelpackage.OrderBy(x=>x.Name),pageNumber,pageSize);
+    }
+
 }
