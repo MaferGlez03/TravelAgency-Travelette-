@@ -37,5 +37,13 @@ namespace TravelAgency.Api.Controllers
 
             return Ok(weekend_excursions);
         }
+        [HttpGet]
+        [Route("list_hotels_packages")]
+        public async Task<ActionResult<IEnumerable<PackageResponseDto>>> ListHotelPackages([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
+        {
+            var weekend_excursions = await _statisticsService.HotelPackages(pageNumber,pageSize);
+
+            return Ok(weekend_excursions);
+        }
     }
 }

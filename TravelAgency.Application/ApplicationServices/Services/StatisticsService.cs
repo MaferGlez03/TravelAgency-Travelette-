@@ -22,13 +22,17 @@ public class StatisticsService : IStatisticsService
     private readonly IHotelRepository _hotelRepository;
     private readonly IPackageRepository _packageRepository;
     private readonly IExcursionRepository _excursionRepository;
+    private readonly IExtendedExcursionRepository _extendedExcursionRepository;
+    private readonly IHotel_ExtendedExcursionRepository _hotel_ExtendedExcursionRepository;
     private readonly IMapper _mapper;
-    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository, IExcursionRepository excursionRepository)
+    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository, IExcursionRepository excursionRepository, IExtendedExcursionRepository extendedExcursionRepository, IHotel_ExtendedExcursionRepository hotel_ExtendedExcursionRepository)
     {
         _packageRepository = packageRepository;
         _excursionRepository = excursionRepository;
         _mapper = mapper;
         _hotelRepository = hotelRepository;
+        _extendedExcursionRepository = extendedExcursionRepository;
+        _hotel_ExtendedExcursionRepository = hotel_ExtendedExcursionRepository;
     }
 
     public async Task<PaginatedList<PackageResponseDto>> SpensivesPackageAsync(int pageNumber, int pageSize)
@@ -98,10 +102,17 @@ public class StatisticsService : IStatisticsService
         {
             foreach (var hotelId in package.PackageExtendedExcursions)
             {
-                var hotel = await _hotelRepository.GetByIdAsync(hotelId);
-                var mappedhotel = _mapper.Map<HotelDto>(hotel);
-                if (!hotelpackage.Contains(mappedhotel))
-                    hotelpackage.Add(mappedhotel);
+                var excursion = await _extendedExcursionRepository.GetByIdAsync(hotelId.ExtendedExcursionId);
+                var hotelExcursion = await _hotel_ExtendedExcursionRepository.ListAsync();
+                var hotelExcursionFinal =hotelExcursion.ToList().Where(x => x.ExtendedExcursionId == excursion.Id);
+                foreach (var item in hotelExcursionFinal)
+                {
+
+                    var hotel = await _hotelRepository.GetByIdAsync(item.HotelId);
+                    var mappedhotel = _mapper.Map<HotelDto>(hotel);
+                    if (!hotelpackage.Contains(mappedhotel))
+                        hotelpackage.Add(mappedhotel);
+                }
             }
 
         }
