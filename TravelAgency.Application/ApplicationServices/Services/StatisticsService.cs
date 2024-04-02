@@ -30,9 +30,11 @@ public class StatisticsService : IStatisticsService
     private readonly IExtendedExcursionRepository _extendedExcursionRepository;
     private readonly IHotel_ExtendedExcursionRepository _hotel_ExtendedExcursionRepository;
     private readonly IMapper _mapper;
+    private readonly IBookExcursionRepository _bookExcursionRepository;
+    private readonly IBookOfferRepository _bookOfferRepository;
 
 
-    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository, IExcursionRepository excursionRepository, IExtendedExcursionRepository extendedExcursionRepository, IHotel_ExtendedExcursionRepository hotel_ExtendedExcursionRepository, IBookPackageRepository bookPackageRepository)
+    public StatisticsService(IPackageRepository packageRepository, IMapper mapper, IHotelRepository hotelRepository, IExcursionRepository excursionRepository, IExtendedExcursionRepository extendedExcursionRepository, IHotel_ExtendedExcursionRepository hotel_ExtendedExcursionRepository, IBookPackageRepository bookPackageRepository, IBookExcursionRepository bookExcursionRepository, IBookOfferRepository bookOfferRepository)
     {
         _packageRepository = packageRepository;
         _excursionRepository = excursionRepository;
@@ -44,6 +46,8 @@ public class StatisticsService : IStatisticsService
         _extendedExcursionRepository = extendedExcursionRepository;
         _hotel_ExtendedExcursionRepository = hotel_ExtendedExcursionRepository;
         _bookPackageRepository = bookPackageRepository;
+        _bookExcursionRepository = bookExcursionRepository;
+        _bookOfferRepository = bookOfferRepository;
     }
 
     public async Task<PaginatedList<FrequentTouristDto>> FrequentTourists(int pageNumber, int pageSize)
