@@ -29,6 +29,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             var ee = _mapper.Map<ExtendedExcursion>(extendedExcursionDto);
             List<Hotel_ExtendedExcursion> _hotel_ExtendedExcursions = new List<Hotel_ExtendedExcursion>();
 
+
             foreach (int hotel in extendedExcursionDto.hotelDtos)
             {
                 Hotel_ExtendedExcursion hotel_ExtendedExcursion = new Hotel_ExtendedExcursion { HotelId = hotel, ExtendedExcursionId = extendedExcursionDto.Id, ArrivalDate = extendedExcursionDto.ArrivalDate1 };

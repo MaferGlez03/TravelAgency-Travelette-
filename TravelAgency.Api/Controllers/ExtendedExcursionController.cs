@@ -66,7 +66,7 @@ namespace TravelAgency.Api.Controllers
 
         public async Task<IActionResult> DeleteExtendedExcursion(int extendedExtendedExcursion)
         {
-             _extendedExtendedExcursionService.DeleteExtendedExcursionAsync(extendedExtendedExcursion);
+            await _extendedExtendedExcursionService.DeleteExtendedExcursionAsync(extendedExtendedExcursion);
            return Ok();
         }
         // public async Task<IActionResult> DeleteExtendedExcursion(ExtendedExcursionDto extendedExtendedExcursion)

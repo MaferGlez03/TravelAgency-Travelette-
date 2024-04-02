@@ -15,11 +15,9 @@ namespace TravelAgency.Api.Controllers
     public class PackageController : ControllerBase
     {
          private readonly IPackageService _packageService;
-         private readonly IStatisticsService _statisticsService;
         public PackageController(IPackageService packageService, IStatisticsService statisticsService)
         {
            _packageService= packageService;
-           _statisticsService = statisticsService;
         }
 
         [HttpPost]
@@ -39,15 +37,6 @@ namespace TravelAgency.Api.Controllers
 
             return Ok(packages);
 
-        }
-
-        [HttpGet]
-        [Route("list_spensives_packages")]
-        public async Task<ActionResult<IEnumerable<PackageResponseDto>>> ListSpensivesPackage([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
-        {
-            var packages = await _statisticsService.SpensivesPackageAsync(pageNumber,pageSize);
-
-            return Ok(packages);
         }
 
         // [HttpGet]

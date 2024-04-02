@@ -11,17 +11,21 @@ using TravelAgency.Application.Common.PaginatedList;
 using TravelAgency.Domain.Entities;
 using TravelAgency.Domain.Relations;
 using TravelAgency.Infrastructure.DataAccess.IRepository;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.WeekendExcursion;
 
 namespace TravelAgency.Application.ApplicationServices.Services;
 
 public class StatisticsService : IStatisticsService
 {
     private readonly IPackageRepository _packageRepository;
+    private readonly IExcursionRepository _excursionRepository;
     private readonly IMapper _mapper;
 
-    public StatisticsService(IPackageRepository packageRepository, IMapper mapper)
+    public StatisticsService(IPackageRepository packageRepository, IExcursionRepository excursionRepository, IMapper mapper)
     {
         _packageRepository = packageRepository;
+        _excursionRepository = excursionRepository;
         _mapper = mapper;
     }
 
@@ -53,5 +57,35 @@ public class StatisticsService : IStatisticsService
             }
         }
        return  PaginatedList<PackageResponseDto>.CreatePaginatedListAsync(packagesfinal,pageNumber,pageSize);
+    }
+
+    public async Task<PaginatedList<WeekendExcursionDto>> WeekendExcursions(int pageNumber, int pageSize)
+    {
+        var excursions = await _excursionRepository!.ListAsync();
+        var list = excursions.ToList();
+        List<WeekendExcursionDto> weekendExcursions = new List<WeekendExcursionDto>();
+
+        foreach (Excursion excursion in list)
+        {
+            var day = excursion.ArrivalDate.DayOfWeek;
+            if( day == DayOfWeek.Friday || day == DayOfWeek.Saturday || day == DayOfWeek.Sunday)
+            {
+                WeekendExcursionDto weekendExcursionDto = new WeekendExcursionDto
+                {
+                    Id = excursion.Id,
+                    AgencyID = excursion.AgencyID,
+                    Name = excursion.Name,
+                    ArrivalDate = excursion.ArrivalDate,
+                    DepartureDate = excursion.DepartureDate,
+                    ArrivalPlace = excursion.ArrivalPlace,
+                    DeparturePlace = excursion.DeparturePlace
+                };
+                weekendExcursions.Add(weekendExcursionDto);
+            } 
+        }
+
+        var sorted_list = weekendExcursions.OrderBy(date => date.ArrivalDate);
+        
+        return PaginatedList<WeekendExcursionDto>.CreatePaginatedListAsync(sorted_list, pageNumber, pageSize);
     }
 }
