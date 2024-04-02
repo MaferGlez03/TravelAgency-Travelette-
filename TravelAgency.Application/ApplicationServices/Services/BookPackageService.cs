@@ -40,7 +40,8 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 Name = bookPackageDto.UserName,
                 Nationality = mappedNationality.ToString(),
-                userId = _user.Id!
+                userId = _user.Id!,
+                Email=bookPackageDto.Email
             };
             var savedTourist = await _touristRepository.CreateAsync(tourist);
             var bookPackage = _mapper.Map<BookPackage>(bookPackageDto);

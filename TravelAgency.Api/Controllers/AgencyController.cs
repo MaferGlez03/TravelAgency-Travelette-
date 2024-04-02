@@ -45,6 +45,16 @@ namespace TravelAgency.Api.Controllers
             return Ok(agencies);
 
         }
+        [HttpGet]
+        [Route("listOffers")]
+        //[Authorize (Roles = "SuperAdmin")]
+        public async Task<ActionResult<IEnumerable<AgencywithOfferDto>>> ListAgencyWithOffers([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
+        {
+            var agencies = await _agencyService.ListAgencyWithOffersAsync(pageNumber,pageSize);
+
+            return Ok(agencies);
+
+        }
 
         [HttpGet]
         [Route("list/filters")]

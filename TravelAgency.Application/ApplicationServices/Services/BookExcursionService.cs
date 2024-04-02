@@ -39,7 +39,9 @@ namespace TravelAgency.Application.ApplicationServices.Services
         var tourist = new Domain.Entities.Tourist
                             {Name = bookExcursionDto.UserName,
                              Nationality = mappedNationality.ToString(),
-                             userId = _user.Id!};
+                             userId = _user.Id!,
+                             Email = bookExcursionDto.Email
+                            };
             var savedTourist = await _touristRepository.CreateAsync(tourist);
             var bookExcursion = _mapper.Map<BookExcursion>(bookExcursionDto);
             var excursion = _excursionRepository.GetById(bookExcursion.ExcursionId);

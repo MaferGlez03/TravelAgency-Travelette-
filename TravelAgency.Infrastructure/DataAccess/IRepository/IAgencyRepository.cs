@@ -11,5 +11,6 @@ namespace TravelAgency.Infrastructure.DataAccess.IRepository
     public interface IAgencyRepository:IGenericRepository<Agency>
     {
           Task<IEnumerable<Agency>> FindAllAgenciesAsync(AgencyFilters? filters);
+          Task<IEnumerable<Agency>> GetAgenciesWithOffers();
     }
 }

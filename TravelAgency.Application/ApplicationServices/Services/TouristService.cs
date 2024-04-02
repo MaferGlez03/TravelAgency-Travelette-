@@ -40,6 +40,7 @@ namespace TravelAgency.Application.ApplicationServices.Services
             tourist.Nationality=touristUser.Nationality.ToString();
             tourist.Name=touristUser.UserName!;
             tourist.userId = touristUser.Id;
+            tourist.Email = touristUser.Email!;
 
             await _touristRepository.CreateAsync(tourist);
             return _mapper.Map<Tourist>(tourist);

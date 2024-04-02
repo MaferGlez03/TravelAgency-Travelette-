@@ -41,7 +41,8 @@ namespace TravelAgency.Application.ApplicationServices.Services
             {
                 Name = bookOfferDto.UserName,
                 Nationality = mappedNationality.ToString(),
-                userId = _user.Id!
+                userId = _user.Id!,
+                Email=bookOfferDto.Email
             };
             var savedTourist = await _touristRepository.CreateAsync(tourist);
             var bookOffer = _mapper.Map<BookOffer>(bookOfferDto);

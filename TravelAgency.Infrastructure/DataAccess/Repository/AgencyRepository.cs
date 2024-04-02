@@ -16,6 +16,10 @@ namespace TravelAgency.Infrastructure.DataAccess.Repository
         {
             
         }
+        public async Task<IEnumerable<Agency>> GetAgenciesWithOffers()
+        {
+            return await entity.Include(x=>x.AgencyOffers).ThenInclude(x=>x.LodgingOffer).ToListAsync();
+        }
         
         public async Task<IEnumerable<Agency>> FindAllAgenciesAsync(AgencyFilters? filters)
         {

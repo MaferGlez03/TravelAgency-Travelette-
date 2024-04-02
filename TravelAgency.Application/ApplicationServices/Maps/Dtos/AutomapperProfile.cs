@@ -33,6 +33,13 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos
             CreateMap<Domain.Entities.Facility, FacilityDto>();
             CreateMap<Domain.Entities.PackageFacility, FacilityDto>();
 
+            CreateMap<AgencywithOfferDto, Domain.Entities.Agency>();
+            CreateMap<Domain.Entities.Agency, AgencywithOfferDto>();
+
+            CreateMap<AgencyOfferDto, Domain.Relations.AgencyOffer>();
+            CreateMap<Domain.Relations.AgencyOffer, AgencyOfferDto>()
+                                            .ForMember(x=>x.offer, o=>o.MapFrom(c=>c.LodgingOffer));
+
             CreateMap<AgencyDto, Domain.Entities.Agency>();
             CreateMap<Domain.Entities.Agency, AgencyDto>();
 

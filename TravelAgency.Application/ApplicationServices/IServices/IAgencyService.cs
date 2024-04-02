@@ -17,6 +17,7 @@ namespace TravelAgency.Application.ApplicationServices.IServices
         Task<AgencyDto> UpdateAgencyAsync(AgencyDto agencyDto);
         //Task<IEnumerable<AgencyDto>> ListAgencyAsync();
         Task<PaginatedList<AgencyDto>> ListAgencyAsync(int pageNumber,int pageSize);
+        Task<PaginatedList<AgencywithOfferDto>> ListAgencyWithOffersAsync(int pageNumber, int pageSize);
         Task<PaginatedList<Agency>> FindAllAgenciesAsync(AgencyFilters? filters ,int pageNumber, int pageSize);
         Task DeleteAgencyByIdAsync(int agencyDto);
         Task AddOffers(AddOfferDto addOfferDto);

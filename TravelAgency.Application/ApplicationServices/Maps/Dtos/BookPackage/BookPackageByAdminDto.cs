@@ -7,6 +7,7 @@ namespace TravelAgency.Application.ApplicationServices.Maps.Dtos.BookPackage
 {
     public class BookPackageByAdminDto:BookPackageDto
     {
+        public string Email {get; set;} = null!;
         public string UserName {get; set;} = null!;
         public int Nacionality{get;set;} 
     }

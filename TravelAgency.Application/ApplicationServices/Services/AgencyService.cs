@@ -89,6 +89,23 @@ namespace TravelAgency.Application.ApplicationServices.Services
 
             return PaginatedList<AgencyDto>.CreatePaginatedListAsync(agenciesfinal, pageNumber, pageSize);
         }
+        public async Task<PaginatedList<AgencywithOfferDto>> ListAgencyWithOffersAsync(int pageNumber, int pageSize)
+        {
+            var agencies = await _agencyRepository.GetAgenciesWithOffers();
+            var list = agencies.ToList();
+            List<AgencywithOfferDto> agenciesfinal = new();
+            for (int i = 0; i < agencies.Count(); i++)
+            {
+               agenciesfinal.Add(_mapper.Map<AgencywithOfferDto>(list[i]));
+            //    foreach (var item in list[i].AgencyOffers)
+            //    {
+            //      agenciesfinal[i].AgencyOffers.Add(_mapper.Map<AgencyOfferDto>(item));
+            //    }
+            }
+
+
+            return PaginatedList<AgencywithOfferDto>.CreatePaginatedListAsync(agenciesfinal, pageNumber, pageSize);
+        }
 
 
         public async Task<AgencyDto> UpdateAgencyAsync(AgencyDto agencyDto)
