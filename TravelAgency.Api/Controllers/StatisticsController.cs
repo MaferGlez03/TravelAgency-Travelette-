@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.ApplicationServices.IServices;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookAgency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.FrequentTourist;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
 using TravelAgency.Domain.Entities;
@@ -54,6 +55,15 @@ namespace TravelAgency.Api.Controllers
             var frequent_tourists = await _statisticsService.FrequentTourists(pageNumber,pageSize);
 
             return Ok(frequent_tourists);
+        }
+
+        [HttpGet]
+        [Route("total_books_per_agency")]
+        public async Task<ActionResult<IEnumerable<BookAgencyDto>>> TotalBooksPerAgency([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
+        {
+            var books_agencies = await _statisticsService.TotalBooksAgency(pageNumber,pageSize);
+
+            return Ok(books_agencies);
         }
     }
 }

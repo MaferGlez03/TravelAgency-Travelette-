@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.BookAgency;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Excursion;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.FrequentTourist;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Hotel;
@@ -18,4 +19,5 @@ public interface IStatisticsService
     Task<PaginatedList<WeekendExcursionDto>> WeekendExcursions(int pageNumber, int pageSize);
     Task<PaginatedList<FrequentTouristDto>> FrequentTourists(int pageNumber, int pageSize);
     Task<PaginatedList<HotelDto>> HotelPackages(int pageNumber, int pageSize);
+    Task<PaginatedList<BookAgencyDto>> TotalBooksAgency(int pageNumber, int pageSize);
 }
