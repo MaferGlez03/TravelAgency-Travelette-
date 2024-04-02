@@ -34,7 +34,9 @@ namespace TravelAgency.Application
             services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();       
             services.AddScoped<IBookOfferService, BookOfferService>();
             services.AddScoped<IBookExcursionService, BookExcursionService>();
+            services.AddScoped<IStatisticsService, StatisticsService>();
             services.AddScoped<IBookPackageService, BookPackageService>();
+
             
 
             //JwtToken configuration.
