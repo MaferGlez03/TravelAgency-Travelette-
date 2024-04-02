@@ -13,6 +13,7 @@ namespace TravelAgency.Domain.Entities
         public string userId {get;set;}
         public string Name {get; set;} = null!;
         public string Nationality {get; set;} = null!;
+        public string Email {get; set;} = null!;
         public IList<BookOffer> BookOffers {get;set;} = new List<BookOffer>();
         public IList<BookExcursion> BookExcursions {get; set;} = new List<BookExcursion>();
          public IList<BookPackage> BookPackages{get; private set;}= new List<BookPackage>();

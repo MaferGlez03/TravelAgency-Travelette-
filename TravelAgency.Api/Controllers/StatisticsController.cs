@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using TravelAgency.Application.ApplicationServices.IServices;
+using TravelAgency.Application.ApplicationServices.Maps.Dtos.FrequentTourist;
 using TravelAgency.Application.ApplicationServices.Maps.Dtos.Package;
 using TravelAgency.Domain.Entities;
 
@@ -36,6 +37,15 @@ namespace TravelAgency.Api.Controllers
             var weekend_excursions = await _statisticsService.WeekendExcursions(pageNumber,pageSize);
 
             return Ok(weekend_excursions);
+        }
+
+        [HttpGet]
+        [Route("list_frequent_tourists")]
+        public async Task<ActionResult<IEnumerable<FrequentTouristDto>>> ListFrequentTourists([FromQuery]int pageNumber =1,[FromQuery] int pageSize= int.MaxValue)
+        {
+            var frequent_tourists = await _statisticsService.FrequentTourists(pageNumber,pageSize);
+
+            return Ok(frequent_tourists);
         }
     }
 }
